@@ -5,12 +5,7 @@
 //Content: the user's homepage, presented after login
     require("database.php");
     session_start();
-        
-    //login check
-    if(!isset($_SESSION['username'])){
-        //echo $_SERVER['SERVER_NAME']; 
-        header("Location:http://".$_SERVER['SERVER_NAME']."/~cse437/HTML/login.html");
-    }
+    login_check();
 ?>
 <html>
     <head>
@@ -18,14 +13,14 @@
         <link rel="stylesheet" type="text/css" href="../CSS/basic-style.css"/>
     </head>
     <body>
-        <h1>Your trips:</h1><br>;
+        <h1>Your trips:</h1><br>
             <table style='width:90%'>
                 <tr>
-                    <td><b>Date</b></td>
-                    <td><b>Time</b></td>
-                    <td><b>Pick up at:</b></td>
-                    <td><b>Drop off at:</b></td>
-                    <td><b>Driver</b></td>
+                    <th><b>Date</b></th>
+                    <th><b>Time</b></th>
+                    <th><b>Pick up at:</b></th>
+                    <th><b>Drop off at:</b></th>
+                    <th><b>Driver</b></th>
                 </tr>
         <?php
             $username = $_SESSION['username'];

@@ -7,6 +7,7 @@
     
     if(!isset($_POST['username']) || !isset($_POST['password'])){
         error_log("Login called without proper fields");
+        echo "Error: fields not set";
         exit;
     }
     

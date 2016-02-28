@@ -3,3 +3,10 @@ body{
     margin:0 auto;
     padding:0;
 }
+tr.table-h1 th{
+    font-size:large;
+    font-weight: bold;
+}
+tr.table-h2 th{
+    font-weight:bold;
+}
