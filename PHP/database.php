@@ -10,4 +10,12 @@ if($mysqli->connect_errno){
     exit;
 }
 
+//utility function to check that user is logged in
+function login_check(){
+    if(!isset($_SESSION['username'])){
+        //echo $_SERVER['SERVER_NAME']; 
+        header("Location:http://".$_SERVER['SERVER_NAME']."/~cse437/HTML/login.html");
+    }
+}
+
 ?>

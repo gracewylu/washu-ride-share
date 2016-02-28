@@ -5,12 +5,7 @@
     
     require('database.php');
     session_start();
-    
-    //login check
-    if (!isset($_SESSION['username'])){
-        //redirect to login page
-        exit;
-    }
+    login_check();
     
     $pick_up_location = $_POST['pick_up_location'];
     $drop_off_location = $_POST['drop_off_location'];
