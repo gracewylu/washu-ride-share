@@ -8,7 +8,8 @@
         
     //login check
     if(!isset($_SESSION['username'])){
-        //header("Location:login.php");
+        //echo $_SERVER['SERVER_NAME']; 
+        header("Location:http://".$_SERVER['SERVER_NAME']."/~cse437/HTML/login.html");
     }
 ?>
 <html>
