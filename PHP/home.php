@@ -15,6 +15,7 @@
 <html>
     <head>
         <title>Get a lift</title>
+        <link rel="stylesheet" type="text/css" href="../CSS/basic-style.css"/>
     </head>
     <body>
         <h1>Your trips:</h1><br>;
@@ -50,6 +51,7 @@
                        $day, $time, $pick_up_location, $drop_off_location, $driver_username);
             }
         ?>
-            </table>
+            </table><br>
+            <a href='http://54.213.111.166/~cse437/HTML/create_event.html'>Post a new trip</a>
     </body>
 </html>
