@@ -1,0 +1,24 @@
+fieldset{
+    width:500px;
+}
+legend{
+    font-size:20px;
+}
+label.field{
+    text-align:right;
+    width:150px;
+    float:left;
+}
+input.text-200{
+    width:200px;
+    float:left;
+}
+input.form-submit{
+    float:left;
+    left:150px;
+    position:relative;
+}
+fieldset p{
+    clear:both;
+    padding:5px;
+}
