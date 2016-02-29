@@ -14,7 +14,7 @@
 <html>
     <head>
         <title>Find a trip</title>
-        <link rel="stylesheet" type="text/css" href="../css/basic-style.css"/>
+        <link rel="stylesheet" type="text/css" href="css/basic-style.css"/>
     </head>
     <body>
         <h1>Upcoming Trips</h1>
@@ -48,10 +48,10 @@
                     $day = $datetime->format("m/d/y");
                     $time = $datetime->format("h:i");
                     if($day != $section_day){
-                        printf("<tr class='table-h2'><th>%s</th></tr>\n", $datetime->format('l, F d, Y'));
+                        printf("<tr class='table-h2'><th colspan='5'>%s</th></tr>\n", $datetime->format('l, F d, Y'));
                         $section_day = $day;
                     }
-                    printf("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></th>\n", $day, $time, $pick_up_location, $drop_off_location, $driver_username);
+                    printf("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>\n", $day, $time, $pick_up_location, $drop_off_location, $driver_username);
                 }
             ?>
         </table>

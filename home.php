@@ -10,7 +10,7 @@
 <html>
     <head>
         <title>Get a lift</title>
-        <link rel="stylesheet" type="text/css" href="../css/basic-style.css"/>
+        <link rel="stylesheet" type="text/css" href="/css/basic-style.css"/>
     </head>
     <body>
         <h1>Your trips:</h1><br>
