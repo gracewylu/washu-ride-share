@@ -14,7 +14,7 @@ if($mysqli->connect_errno){
 function login_check(){
     if(!isset($_SESSION['username'])){
         //echo $_SERVER['SERVER_NAME']; 
-        header("Location:http://".$_SERVER['SERVER_NAME']."/~cse437/HTML/login.html");
+        header("Location:http://".$_SERVER['SERVER_NAME']."/~cse437/login.html");
     }
 }
 

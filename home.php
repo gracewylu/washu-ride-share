@@ -47,6 +47,6 @@
             }
         ?>
             </table><br>
-            <a href='http://54.213.111.166/~cse437/HTML/create_event.html'>Post a new trip</a>
+            <a href='http://54.213.111.166/~cse437/create_event.html'>Post a new trip</a>
     </body>
 </html>

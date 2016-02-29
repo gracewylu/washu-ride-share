@@ -27,6 +27,6 @@
         header("Location:home.php");
     }
     else{
-        header("Location:http://".$_SERVER['SERVER_NAME']."/~cse437/HTML/login.html");
+        header("Location:http://".$_SERVER['SERVER_NAME']."/~cse437/login.html");
     }
 ?>
