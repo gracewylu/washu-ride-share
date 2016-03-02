@@ -14,7 +14,6 @@
 <html>
     <head>
         <title>Find a trip</title>
-        <link rel="stylesheet" type="text/css" href="css/basic-style.css"/>
     </head>
     <body>
         <h1>Upcoming Trips</h1>
