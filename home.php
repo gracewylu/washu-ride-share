@@ -11,7 +11,18 @@
 <html>
     <head>
         <title>Get a lift</title>
-        <link rel="stylesheet" type="text/css" href="/css/basic-style.css"/>
+        <!--Materialize setup-->
+        <!--Import Google Icon Font-->
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <link rel="stylesheet" type="text/css" href="/css/basic-style.css"/>
+      
+      <!--Navbar-->
+      <?php include("navbar.php");?>
     </head>
     <body>
         <h1>Your trips:</h1><br>
@@ -49,5 +60,9 @@
         ?>
             </table><br>
             <a href='http://54.213.111.166/~cse437/create_event.html'>Post a new trip</a>
+        
+        <!--Finish Materialize setup-->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="js/materialize.min.js"></script>
     </body>
 </html>
