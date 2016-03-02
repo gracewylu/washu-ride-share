@@ -12,19 +12,15 @@
     <head>
         <title>Get a lift</title>
         <!--Materialize setup-->
-        <!--Import Google Icon Font-->
       <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <!--Import materialize.css-->
       <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-
-      <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
       
       <!--Navbar-->
       <?php include("navbar.php");?>
     </head>
     <body>
-        <h1>Your trips:</h1><br>
+        <h1>Your rides:</h1><br>
             <table style='width:90%'>
                 <tr>
                     <th><b>Date</b></th>
@@ -63,5 +59,11 @@
         <!--Finish Materialize setup-->
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script type="text/javascript" src="js/materialize.min.js"></script>
+        <!--Set document ready function so mobile navbar button works:-->
+      <script>
+        $( document ).ready(function() {
+            $(".button-collapse").sideNav();
+        });
+      </script>
     </body>
 </html>
