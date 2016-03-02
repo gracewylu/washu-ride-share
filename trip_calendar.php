@@ -1,3 +1,4 @@
+<!--
 <?php
 //Filename: trip_calendar.php
 //Author: Sam Teeter
@@ -10,6 +11,7 @@
     //display upcoming trip events in a sectioned list
     //TODO: create search bar where they can narrow results by date, location
 ?>
+-->
 <!DOCTYPE html>
 <html>
     <head>
@@ -19,6 +21,7 @@
     <body>
         <h1>Upcoming Trips</h1>
         <table style='width:100%'>
+			<thead>
             <tr class='table-h1'>
                 <th>Date:</th>
                 <th>Time:</th>
@@ -26,6 +29,9 @@
                 <th>Drop off:</th>
                 <th>Driver:</th>
             </tr>
+			</thead>
+			
+			<!--
             <?php
                 //display list of elements grouped by day, with list section headings showing the days
                 //TODO: give user option to select date range, possibly change how trips are sorted
@@ -54,6 +60,8 @@
                     printf("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></th>\n", $day, $time, $pick_up_location, $drop_off_location, $driver_username);
                 }
             ?>
+			-->
+			
         </table>
     </body>
 </html>
