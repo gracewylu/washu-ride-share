@@ -16,6 +16,9 @@ tr.table-h2{
     border:solid;
     font-weight: bold;
 }
+tr{
+    border:1px solid;
+}
 td{
     text-align: center;
 }
