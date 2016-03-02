@@ -6,6 +6,7 @@
     require("database.php");
     session_start();
     login_check();
+    date_default_timezone_set("UTC");
 ?>
 <html>
     <head>
