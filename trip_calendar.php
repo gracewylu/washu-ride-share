@@ -13,21 +13,37 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Find a trip</title>
-        <link rel="stylesheet" type="text/css" href="css/basic-style.css"/>
+        <title>Ride Calendar</title>
+        <!--Materialize setup-->
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      
+      <!--Navbar-->
+      <?php include("navbar.php");?>
+      
+      <script>
+        $( document ).ready(function() {
+            $(".button-collapse").sideNav();
+        });
+      </script>
     </head>
     <body>
-        <h1>Upcoming Trips</h1>
+        <div class='container'>
+        <h1>Upcoming Rides</h1>
         <table style='width:100%'>
-            <tr class='table-h1'>
-                <th>Date:</th>
-                <th>Time:</th>
-                <th>Pick up:</th>
-                <th>Drop off:</th>
-                <th>Driver:</th>
-            </tr>
+            <thead>
+                <tr class='table-h1'>
+                    <th>Date:</th>
+                    <th>Time:</th>
+                    <th>Pick up:</th>
+                    <th>Drop off:</th>
+                    <th>Driver:</th>
+                </tr>
+            </thead>
             <?php
-                //display list of elements grouped by day, with list section headings showing the days
+                //display upcoming trips
+                //TODO: consider switching table to materialize collapsible
                 //TODO: give user option to select date range, possibly change how trips are sorted
                 //TODO: link to some kind of details page for each trip where they can view more information
                 //TODO: button to let them join the trip
@@ -42,18 +58,25 @@
                 $query->execute();
                 $query->bind_result($date, $pick_up_location, $drop_off_location, $driver_username);
                 
-                $section_day = date("m/d/y", strtotime("yesterday")); //set this to yesterday so the first date will be greater
                 while($query->fetch()){
                     $datetime = new DateTime($date);
                     $day = $datetime->format("m/d/y");
                     $time = $datetime->format("h:i");
-                    if($day != $section_day){
-                        printf("<tr class='table-h2'><th colspan='5'>%s</th></tr>\n", $datetime->format('l, F d, Y'));
-                        $section_day = $day;
-                    }
                     printf("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>\n", $day, $time, $pick_up_location, $drop_off_location, $driver_username);
                 }
             ?>
         </table>
+        </div>
+        
+        <!--Finish Materialize setup-->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="js/materialize.min.js"></script>
+        
+        <!--Set document ready function so mobile navbar button works:-->
+      <script>
+        $( document ).ready(function() {
+            $(".button-collapse").sideNav();
+        });
+      </script>
     </body>
 </html>

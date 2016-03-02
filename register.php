@@ -37,7 +37,6 @@
 <html>
     <head>
         <title>Register</title>
-        <link rel="stylesheet" type="text/css" href="css/basic-style.css"/>
         <link rel="stylesheet" type="text/css" href="css/input-form.css"/>
     </head>
     <body>
