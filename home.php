@@ -10,7 +10,7 @@
 ?>
 <html>
     <head>
-        <title>Get a lift</title>
+        <title>Get A Ride</title>
         <!--Materialize setup-->
       <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
