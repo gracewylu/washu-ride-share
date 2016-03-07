@@ -24,6 +24,8 @@
 		<!--Let browser know website is optimized for mobile-->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		
+		<!--Navbar-->
+      <?php include("navbar.php");?>
     </head>
     <body>
         <h1>Upcoming Trips</h1>
@@ -76,16 +78,10 @@
                 $query->execute();
                 $query->bind_result($date, $pick_up_location, $drop_off_location, $driver_username, $id);
                 
-                $section_day = date("m/d/y", strtotime("yesterday")); //set this to yesterday so the first date will be greater
                 while($query->fetch()){
                     $datetime = new DateTime($date);
                     $day = $datetime->format("m/d/y");
                     $time = $datetime->format("h:i");
-                    if($day != $section_day){
-                        printf("<tr class='table-h2'><th colspan='5'>%s</th></tr>\n", $datetime->format('l, F d, Y'));
-                        $section_day = $day;
-                    }
-					
 					
 					$new_entry = "<tr><form method='POST' action='join_event.php'><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><input type='hidden' name='id' value='%d'>";
 					
@@ -110,7 +106,14 @@
 			
         </table>
 		
-		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-		<script type="text/javascript" src="js/materialize.min.js"></script>
+		<!--Finish Materialize setup-->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="js/materialize.min.js"></script>
+        <!--Set document ready function so mobile navbar button works:-->
+      <script>
+        $( document ).ready(function() {
+            $(".button-collapse").sideNav();
+        });
+	  </script>
     </body>
 </html>
