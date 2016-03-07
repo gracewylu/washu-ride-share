@@ -8,7 +8,7 @@
 	require('database.php');
 	session_start();
 
-	$trip_id = $_GET['id'];
+	$trip_id = $_POST['id'];
 	if($trip_id){
 		$query = $mysqli->prepare('select seats_available from trips where id = ?');
 		if(!$query){
