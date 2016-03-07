@@ -98,7 +98,7 @@
 					
 					//delete once "joined" is working
 
-					$new_entry += "<td><button type='submit' class='waves-effect waves-light btn'>Join</button></td></form></tr>";
+					$new_entry .= "<td><button type='submit' class='waves-effect waves-light btn'>Join</button></td></form></tr>";
 					
                     printf($new_entry, $day, $time, $pick_up_location, $drop_off_location, $driver_username, $id);
                 }
