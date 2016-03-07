@@ -87,7 +87,7 @@
                     }
 					
 					
-					$new_entry = "<tr><form method='POST' action='join_event.php'><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><input type='hidden' name='id' value='%d'>"
+					$new_entry = "<tr><form method='POST' action='join_event.php'><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><input type='hidden' name='id' value='%d'>";
 					
 					//need way to check if user is already in this trip
 					//if they are, display a disabled "Going" button instead
@@ -101,7 +101,7 @@
 					*/
 					
 					//delete once "joined" is working
-					$new_entry += "<td><button type='submit' class='waves-effect waves-light btn'>Join</button></td></form></tr>"
+					$new_entry += "<td><button type='submit' class='waves-effect waves-light btn'>Join</button></td></form></tr>";
 					
                     printf($new_entry, $day, $time, $pick_up_location, $drop_off_location, $driver_username, $id);
                 }
