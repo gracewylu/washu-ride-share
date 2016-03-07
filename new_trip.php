@@ -9,7 +9,7 @@
     
     $pick_up_location = $_POST['pick_up_location'];
     $drop_off_location = $_POST['drop_off_location'];
-    $driver_username = $_POST['username'];
+    $driver_username = $_SESSION['username'];
     $car_id = $_POST['car_id'];
     $date = $_POST['date'];
     $seats_available = $POST['seats_available'];
