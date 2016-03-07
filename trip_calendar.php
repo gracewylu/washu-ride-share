@@ -12,7 +12,10 @@
     //TODO: create search bar where they can narrow results by date, location
 ?>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 96c2e8d601b4a037e8fdf1f6bf52bcceee91de71
 <!DOCTYPE html>
 <html>
     <head>
@@ -25,6 +28,11 @@
 		<!--Let browser know website is optimized for mobile-->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		
+<<<<<<< HEAD
+=======
+		<!--Navbar-->
+      <?php include("navbar.php");?>
+>>>>>>> 96c2e8d601b4a037e8fdf1f6bf52bcceee91de71
     </head>
     <body>
         <h1>Upcoming Trips</h1>
@@ -61,7 +69,10 @@
 			</tr>
 			
 			
+<<<<<<< HEAD
 		
+=======
+>>>>>>> 96c2e8d601b4a037e8fdf1f6bf52bcceee91de71
             <?php
                 //display list of elements grouped by day, with list section headings showing the days
                 //TODO: give user option to select date range, possibly change how trips are sorted
@@ -78,11 +89,11 @@
                 $query->execute();
                 $query->bind_result($date, $pick_up_location, $drop_off_location, $driver_username, $id);
                 
-                $section_day = date("m/d/y", strtotime("yesterday")); //set this to yesterday so the first date will be greater
                 while($query->fetch()){
                     $datetime = new DateTime($date);
                     $day = $datetime->format("m/d/y");
                     $time = $datetime->format("h:i");
+<<<<<<< HEAD
                     if($day != $section_day){
                         printf("<tr class='table-h2'><th colspan='5'>%s</th></tr>\n", $datetime->format('l, F d, Y'));
                         $section_day = $day;
@@ -90,6 +101,10 @@
 					
 					
 					$new_entry = "<tr><form method='POST' action='join_event.php'><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><input type='hidden' name='id' value='%d'>"
+=======
+					
+					$new_entry = "<tr><form method='POST' action='join_event.php'><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><input type='hidden' name='id' value='%d'>";
+>>>>>>> 96c2e8d601b4a037e8fdf1f6bf52bcceee91de71
 					
 					//need way to check if user is already in this trip
 					//if they are, display a disabled "Going" button instead
@@ -103,7 +118,11 @@
 					*/
 					
 					//delete once "joined" is working
+<<<<<<< HEAD
 					$new_entry += "<td><button type='submit' class='waves-effect waves-light btn'>Join</button></td></form></tr>"
+=======
+					$new_entry += "<td><button type='submit' class='waves-effect waves-light btn'>Join</button></td></form></tr>";
+>>>>>>> 96c2e8d601b4a037e8fdf1f6bf52bcceee91de71
 					
                     printf($new_entry, $day, $time, $pick_up_location, $drop_off_location, $driver_username, $id);
                 }
@@ -112,7 +131,19 @@
 			
         </table>
 		
+<<<<<<< HEAD
 		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 		<script type="text/javascript" src="js/materialize.min.js"></script>
+=======
+		<!--Finish Materialize setup-->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="js/materialize.min.js"></script>
+        <!--Set document ready function so mobile navbar button works:-->
+      <script>
+        $( document ).ready(function() {
+            $(".button-collapse").sideNav();
+        });
+	  </script>
+>>>>>>> 96c2e8d601b4a037e8fdf1f6bf52bcceee91de71
     </body>
 </html>
