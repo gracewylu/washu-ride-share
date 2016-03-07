@@ -37,8 +37,11 @@
 <html>
     <head>
         <title>Register</title>
-        <link rel="stylesheet" type="text/css" href="../CSS/basic-style.css"/>
-        <link rel="stylesheet" type="text/css" href="../CSS/input-form.css"/>
+<<<<<<< HEAD
+        <link rel="stylesheet" type="text/css" href="css/basic-style.css"/>
+=======
+>>>>>>> 96c2e8d601b4a037e8fdf1f6bf52bcceee91de71
+        <link rel="stylesheet" type="text/css" href="css/input-form.css"/>
     </head>
     <body>
         <form action='register.php' method='post'>
