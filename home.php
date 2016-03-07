@@ -10,10 +10,6 @@
 ?>
 <html>
     <head>
-<<<<<<< HEAD
-        <title>Get a lift</title>
-        <link rel="stylesheet" type="text/css" href="/css/basic-style.css"/>
-=======
         <title>Get A Ride</title>
         <!--Materialize setup-->
       <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -22,7 +18,6 @@
       
       <!--Navbar-->
       <?php include("navbar.php");?>
->>>>>>> 96c2e8d601b4a037e8fdf1f6bf52bcceee91de71
     </head>
     <body>
         <h1>Your rides:</h1><br>
