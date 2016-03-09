@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <?php
     require('database.php');
     session_start();
+    login_check();
     include('navbar.php');
 ?>
 
