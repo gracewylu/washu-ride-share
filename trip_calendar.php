@@ -41,7 +41,6 @@
                 <th>Pick up</th>
                 <th>Drop off</th>
                 <th>Driver</th>
-                <th>Seats Available</th>
             </tr>
 			</thead>
 			
@@ -70,7 +69,7 @@
 				
                 $query = $mysqli->prepare("select date, pick_up_location, drop_off_location, driver_username, id
                                           from trips
-                                          where date between now() and date_add(now(), Interval 7 day)
+                                          where date between date_sub(now(), INTERVAL 1 week) and now()
                                           order by date asc");
                 if (!$query){
                     error_log("Could not prepare trips query");
