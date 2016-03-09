@@ -26,7 +26,7 @@
 		
 
 		<!--Navbar-->
-      <?php include("navbar.php");?>
+     <?php include("navbar.php");?>
     </head>
     <body>
         <h1>Upcoming Trips</h1>
@@ -41,6 +41,7 @@
                 <th>Pick up</th>
                 <th>Drop off</th>
                 <th>Driver</th>
+                <th>Seats Available</th>
             </tr>
 			</thead>
 			
@@ -69,7 +70,7 @@
 				
                 $query = $mysqli->prepare("select date, pick_up_location, drop_off_location, driver_username, id
                                           from trips
-                                          where date between now() and now()+interval 7 day
+                                          where date between now() and date_add(now(), Interval 7 day)
                                           order by date asc");
                 if (!$query){
                     error_log("Could not prepare trips query");
@@ -78,6 +79,7 @@
                 $query->execute();
                 $query->bind_result($date, $pick_up_location, $drop_off_location, $driver_username, $id);
                 
+                //grabs the info of trip from query 
                 while($query->fetch()){
                     $datetime = new DateTime($date);
                     $day = $datetime->format("m/d/y");
@@ -87,17 +89,14 @@
 					
 					//need way to check if user is already in this trip
 					//if they are, display a disabled "Going" button instead
-					/*
-					if ($joined) {
-						$new_entry += "<td><button type='submit' class='btn disabled' disabled>Going</button></td></form></tr>"
-					}
-					else {
-						$new_entry += "<td><button type='submit' class='waves-effect waves-light btn'>Join</button></td></form></tr>"
-					}
-					*/
+					// if (isset($_SESSION['joined'])) {
+					// 	$new_entry .= "<td><button type='submit' class='btn disabled' disabled>Going</button></td></form></tr>";
+					// }
+					// else {
+					// 	$new_entry .= "<td><button type='submit' class='waves-effect waves-light btn'>Join</button></td></form></tr>";
+					// }
 					
-					//delete once "joined" is working
-
+					
 					$new_entry .= "<td><button type='submit' class='waves-effect waves-light btn'>Join</button></td></form></tr>";
 					
                     printf($new_entry, $day, $time, $pick_up_location, $drop_off_location, $driver_username, $id);
@@ -114,6 +113,7 @@
       <script>
         $( document ).ready(function() {
             $(".button-collapse").sideNav();
+            $('.modal-trigger').leanModal();
         });
 	  </script>
     </body>
