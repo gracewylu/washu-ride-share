@@ -1,14 +1,35 @@
 <!doctype html>
 <html>
     <head>
+        <link rel="stylesheet" type="text/css" href="css/materialize.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <title>Log in</title>
+        <script src="js/materialize.min.js"></script>
     </head>
     <body>
-        Log in or <a href='http://54.213.111.166/~cse437/register.php'>register</a><br>
+        <!-- Log in or <a href='http://54.213.111.166/~cse437/register.php'>register</a><br> -->
+        <div class="section teal lighten-4">
+             <div class="container">
+                 <h2 class="header center grey-text text-darken-3">
+                     Wash U Ride Sharing
+                 </h2>
+                 <div class="row center">
+                     <h5>
+                         An easy way for students to find rides for events they want to go to.
+                     </h5>
+                 </div>
+             </div>
+         </div>
+         <div class="container">
+         <h6 class="blue-grey-text">Log in or <a href='http://54.213.111.166/~cse437/register.php'>register</a></h6><br>
         <form action='/~cse437/login.php' method='post'>
             Username: <input type='text' name='username' value=''/><br>
             Password: <input type='password' name='password' value=''/><br>
-            <input type='submit' name='submit' value='Log in'/>
+            <!-- <input type='submit' name='submit' value='Log in'/> -->
+            <button class="btn waves-effect waves-light" type="submit" name="action">Log In
+            <i class="material-icons right">send</i>
+            </button>
         </form>
+    </div>
     </body>
 </html>

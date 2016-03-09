@@ -37,20 +37,33 @@
 <html>
     <head>
         <title>Register</title>
-        <link rel="stylesheet" type="text/css" href="css/input-form.css"/>
+        <link rel="stylesheet" type="text/css" href="css/materialize.min.css"/>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <script src="js/materialize.min.js"></script>
     </head>
     <body>
+        <div class="section teal lighten-4">
+             <div class="container">
+                 <h2 class="header center grey-text text-darken-3">
+                     Register
+                 </h2>
+             </div>
+         </div>
+         <div class="container">
         <form action='register.php' method='post'>
-            <fieldset>
-                <legend>Enter your login information:</legend>
+            <h5 class="header center blue-text darken-4">
+                 Enter your login information:
+             </h5>
                 <p><label class='field'>Username: </label><input name='username' type='text' class='text-200'/></p>
                 <p><label class='field'>First name: </label><input name="first_name" type='text' class='text-200'/></p>
                 <p><label class='field'>Last name: </label><input name="last_name" type='text' class='text-200'/></p>
                 <p><label class='field'>Email: </label><input type='email' name='email_address' class='text-200'/></p>
                 <p><label class='field'>Password: </label><input name='password' type='password' class='text-200'/></p>
                 <p><label class='field'>Re-type password: </label><input name='password_retype' type='password' class='text-200'/></p>
-                <p><input type='submit' class='form-submit' name='submit' value='Register'/></p>
-            </fieldset>
+                <p><button class="btn waves-effect waves-light" type='submit' name='submit'>Register
+                <i class="material-icons right">send</i>
+             </button></p>
         </form>
+    </div>
     </body>
 </html>

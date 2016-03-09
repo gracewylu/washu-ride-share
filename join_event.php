@@ -29,15 +29,17 @@
 			$joined_query->bind_param('ii', $seats_available-1, $trip_id);
 			$joined_query->execute();
 
+			$_SESSION['joined'] = true;
 			//modal pops up stating success!
-			echo '<a class="waves-effect waves-light btn modal-trigger" href="#full_modal">Modal</a><div id="full_modal" class="modal"><div class="modal-content"><h4>You\'ve joined!</h4><p>You are now a part of this trip!</p></div></div>';
 			$joined_query->close();
 		}
 		else{
+			$_SESSION['joined'] = false;
 			//pop up a modal stating that trip is full
-			echo '<a class="waves-effect waves-light btn modal-trigger" href="#full_modal">Modal</a><div id="full_modal" class="modal"><div class="modal-content"><h4>Sorry!</h4><p>This trip is full at the moment, please join another trip!</p></div></div>';
+			//echo '<a class="waves-effect waves-light btn modal-trigger" href="#full_modal">Modal</a><div id="full_modal" class="modal"><div class="modal-content"><h4>Sorry!</h4><p>This trip is full at the moment, please join another trip!</p></div></div>';
 		}
 		$query->close();
+		header("Location:trip_calendar.php");
 	}
 ?>
 <head>

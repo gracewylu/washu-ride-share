@@ -31,7 +31,6 @@
                 </tr>
         <?php
             $username = $_SESSION['username'];
-            
             //fetch trips the user is part of
             $trip_request = $mysqli->prepare("select date, pick_up_location, drop_off_location, driver_username
                                              from trips join trips2users on trips.id = trips2users.trip_id
@@ -54,7 +53,7 @@
             }
         ?>
             </table><br>
-            <a href='http://54.213.111.166/~cse437/create_event.html'>Post a new trip</a>
+            <a href='http://54.213.111.166/~cse437/create_trip.php'>Post a new trip</a>
         
         <!--Finish Materialize setup-->
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>

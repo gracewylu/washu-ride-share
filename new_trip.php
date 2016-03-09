@@ -5,26 +5,28 @@
     
     require('database.php');
     session_start();
-    login_check();
     
     $pick_up_location = $_POST['pick_up_location'];
     $drop_off_location = $_POST['drop_off_location'];
     $driver_username = $_SESSION['username'];
-    $car_id = $_POST['car_id'];
     $date = $_POST['date'];
-    $seats_available = $POST['seats_available'];
+    $seats_available = $_POST['seats_available'];
     
-    $insert_query = $mysqli->prepare("begin;
-                                     insert into trips (pick_up_location, drop_off_location, driver_username, car_id, date, seats_available)
-                                     values (?, ?, ?, ?, ?, ?);
-                                     insert into trips2users (trip_id, username)
-                                     values (LAST_INSERT_ID(),?);
-                                     commit;");
+    $insert_query = $mysqli->prepare("insert into trips (pick_up_location, drop_off_location, driver_username, date, seats_available)
+                                     values (?, ?, ?, ?, ?);");
+    $insert_trip_query = $mysqli->prepare("insert into trips2users (trip_id, username)
+                                     values (LAST_INSERT_ID(),?);");
     if (!$insert_query){
         error_log("Failed to prepare new trip query");
     }
-    $insert_query->bind_param("sssisis", $pick_up_location, $drop_off_location, $driver_username, $car_id, $date, $seats_available, $driver_username);
+    if(!$insert_trip_query){
+        error_log("Failed to prepare new trip query");
+    }
+    $insert_query->bind_param("ssssi", $pick_up_location, $drop_off_location, $driver_username, $date, $seats_available);
+    $insert_trip_query->bind_param("s", $driver_username);
     $insert_query->execute();
+    $insert_trip_query->execute();
+    $insert_trip_query->close();
     $insert_query->close();
     
     
