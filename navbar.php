@@ -7,7 +7,7 @@
 //Pages that use this will need to have the materialize environment set up
 
 echo<<<HTML
-<nav>
+<nav class = "green darken-4" role="navigation">
     <div class='nav-wrapper'>
         <a href='trip_calendar.php' class='brand-logo'>Get a Ride</a>
         <a href='#' data-activates='sidebar' class='button-collapse'><i class='material-icons'>menu</i></a>
