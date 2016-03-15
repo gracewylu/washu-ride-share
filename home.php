@@ -20,7 +20,7 @@
       <?php include("navbar.php");?>
     </head>
     <body>
-        <h1>Your rides:</h1><br>
+        <h1 class="blue-grey-text">Your rides:</h1><br>
             <table style='width:90%'>
                 <tr>
                     <th><b>Date</b></th>

@@ -29,7 +29,7 @@
      <?php include("navbar.php");?>
     </head>
     <body>
-        <h1>Upcoming Trips</h1>
+        <h1 class="blue-grey-text">Upcoming Trips</h1>
 		
 		<!-- search bar here -->
 	
