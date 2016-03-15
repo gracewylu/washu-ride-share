@@ -29,7 +29,8 @@
      <?php include("navbar.php");?>
     </head>
     <body>
-        <h1>Upcoming Trips</h1>
+		<div class='container'>
+        <h1 class="blue-grey-text">Upcoming Rides</h1>
 		
 		<!-- search bar here -->
 	
@@ -104,6 +105,7 @@
 			
 			
         </table>
+		</div>
 		
 		<!--Finish Materialize setup-->
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
