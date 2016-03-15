@@ -13,7 +13,7 @@ nav ul li a{
 </style>
 <nav>
     <div class='nav-wrapper teal lighten-4 black-text'>
-        <a href='trip_calendar.php' class='brand-logo grey-text text-darken-3'>Get a Ride</a>
+        <a href='trip_calendar.php' class='brand-logo grey-text text-darken-3'>&nbsp;Get a Ride</a>
         <a href='#' data-activates='sidebar' class='button-collapse'><i class='material-icons'>menu</i></a>
         <ul id='nav-mobile' class='right hide-on-med-and-down'>
             <li><a href='home.php'>My Rides</a></li>
