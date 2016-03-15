@@ -20,6 +20,7 @@
       <?php include("navbar.php");?>
     </head>
     <body>
+        <div class="container">
         <h1 class="blue-grey-text">Your rides:</h1><br>
             <table style='width:90%'>
                 <tr>
@@ -53,7 +54,8 @@
             }
         ?>
             </table><br>
-            <a href='http://54.213.111.166/~cse437/create_trip.php'>Post a new trip</a>
+            <a href='http://54.213.111.166/~cse437/create_trip.php'>Post a new ride</a>
+        </div>
         
         <!--Finish Materialize setup-->
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
