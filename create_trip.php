@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		  
 		  <div class="row">
 			<div class="input-field col s6">
-				<select>
+				<select name="time" id="time">
 					<option value="0">12:00 AM</option>
 					<?php for($h=1; $h<12; $h++){
 						for ($m=0.0; $m<60; $m+=15){
