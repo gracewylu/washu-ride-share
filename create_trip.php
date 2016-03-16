@@ -48,10 +48,31 @@ document.addEventListener('DOMContentLoaded', function() {
 			  <label for="date">Date</label>
 			</div>
 		  </div>
+		  
+		  <div class="row">
+			<div class="input-field col s6">
+				<select>
+					<option value="0">12:00 AM</option>
+					<?php for($h=1; $h<12; $h++){
+						for ($m=0.0; $m<60; $m+=15){
+							printf("<option value=%d>%d:%02d AM </option>/n", $h+$m/60.0, $h, $m);
+						}
+					}?>
+					<option value="12" selected>12:00 PM</option>
+					<?php for($h=13; $h<24; $h++){
+						for ($m=0.0; $m<60; $m+=15){
+							printf("<option value=%d>%d:%02d PM </option>/n", $h+$m/60.0, $h-12, $m);
+						}
+					}?>
+				</select>
+				<label>Time</label>
+			</div>
+		</div>
+		  
 		  <div class="row">
 			  <div class="input-field col s6">
 			  <input id="pick_up_location" name="pick_up_location" type="text" class="validate"/>
-			  <label for="pick_up_location">Pick-up Spot</label>
+			  <label for="pick_up_location">Pick-up Location</label>
 			</div>
 		  </div>
 		  <div class="row">
@@ -67,16 +88,15 @@ document.addEventListener('DOMContentLoaded', function() {
 					<option value="">Select a car</option>
 					<?php foreach ($cars as $car){
 						echo "<option value='".htmlentities($car["id"])."'>".htmlentities($car["name"])."</option>";
-					}
-					?>	
+					}?>	
 				</select>
 				<label>Car</label>
 			</div>
-		</div>
+		  </div>
 		  
 		  <div class="row">
 			  <div class="input-field col s6">
-			  <input id="seats_available" name="seats_available" type="text" class="validate" value="1" min="1" max="5">
+			  <input id="seats_available" name="seats_available" type="number" class="validate" value="1" min="1" max="5">
 			  <label for="seats_available">Available Seats</label>
 			</div>
 		  </div>
