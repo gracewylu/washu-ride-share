@@ -20,8 +20,26 @@ document.addEventListener('DOMContentLoaded', function() {
     require('database.php');
     session_start();
     include('navbar.php');
+	login_check();
+	
+	$username = trim($_SESSION['username']);
+	
+	//check if user has car
+	$cars;
+	$query = $mysqli->prepare("select car_id, make, year from cars where owner='".$username."';");
+	if(!$query){
+		exit;
+	}
+	$query->execute();
+	
+	$result = $query->get_result();
+	$i=0;
+	while($row=$result->fetch_assoc()){
+		$cars[$i]["name"] = $row["year"]." ".$row["make"];
+		$cars[$i]["id"] = $row["car_id"];
+	}
 ?>
-
+  <div class='container'>
 	<div class="row">
 		<form class="col s12" action="new_trip.php" method="POST">
 		  <div class="row">
@@ -42,15 +60,20 @@ document.addEventListener('DOMContentLoaded', function() {
 			  <label for="drop_off_location">Drop-off Location</label>
 			</div>
 		  </div>
+		 
 		  <div class="row">
-			  <div class="input-field col s6">
-			  <select>
-				<option value="1">Car 1</option>
-				<option value="2">Car 2</option>
-			  </select>
-			  <label for="car">Car</label>
+			<div class="input-field col s6">
+				<select>
+					<option value="">Select a car</option>
+					<?php foreach ($cars as $car){
+						echo "<option value='".htmlentities($car["id"])."'>".htmlentities($car["name"])."</option>";
+					}
+					?>	
+				</select>
+				<label>Car</label>
 			</div>
-		  </div>
+		</div>
+		  
 		  <div class="row">
 			  <div class="input-field col s6">
 			  <input id="seats_available" name="seats_available" type="text" class="validate" value="1" min="1" max="5">
@@ -66,8 +89,9 @@ document.addEventListener('DOMContentLoaded', function() {
 			  </div>
 		  </div>
 	  </form>
-	</div>
-
+	</div><!--End row-->
+	
+  </div><!--End container-->
 </body>
 
 <!--Finish Materialize setup-->
@@ -85,6 +109,9 @@ document.addEventListener('DOMContentLoaded', function() {
 		$('.datepicker').pickadate({
 			selectMonths: true, // Creates a dropdown to control month
 		  });
+		
+		//setup for materialize select
+		$('select').material_select();
 	  </script>
 
 </html>
