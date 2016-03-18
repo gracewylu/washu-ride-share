@@ -6,6 +6,14 @@
 //Pages that use this will need to have the materialize environment set up
 
 echo<<<HTML
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<!--Import materialize.css-->
+<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+
+<!--Let browser know website is optimized for mobile-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
 <style>
 nav ul li a{
     color:#424242
@@ -19,16 +27,26 @@ nav ul li a{
             <li><a href='home.php'>My Rides</a></li>
             <li><a href='trip_calendar.php'>Ride Calendar</a></li>
 			<li><a href='logout.php'>Logout</a></li>
+            <li><a href="#" data-activates="chat_window" id="chat-button"><i class='material-icons'>chat_bubble_outline</i></a></li>
         </ul>
         <ul class='side-nav' id='sidebar'>
             <li><a href='home.php'>My Rides</a></li>
             <li><a href='trip_calendar.php'>Ride Calendar</a></li>
 			<li><a href='logout.php'>Logout</a></li>
         </ul>
+        
     </div>
 </nav>
-HTML;
 
-//NOTE: pages that include the navbar will also need to add the following line to the document ready function in jQuery:
-// $(".button-collapse").sideNav();
+<!--Finish Materialize setup-->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="js/materialize.min.js"></script>
+
+<script>
+    $( document ).ready(function() {
+        $(".button-collapse").sideNav();
+    });
+</script>
+
+HTML;
 ?>
