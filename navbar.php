@@ -14,6 +14,10 @@ echo<<<HTML
 <!--Let browser know website is optimized for mobile-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
+<!--Setup jquery ui-->
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
 <style>
 nav ul li a{
     color:#424242
@@ -27,14 +31,13 @@ nav ul li a{
             <li><a href='home.php'>My Rides</a></li>
             <li><a href='trip_calendar.php'>Ride Calendar</a></li>
 			<li><a href='logout.php'>Logout</a></li>
-            <li><a href="#" data-activates="chat_window" id="chat-button"><i class='material-icons'>chat_bubble_outline</i></a></li>
+            <li><a href="#" id="chat-button" class="white-text"><i class='material-icons'>chat_bubble_outline</i></a></li>
         </ul>
         <ul class='side-nav' id='sidebar'>
             <li><a href='home.php'>My Rides</a></li>
             <li><a href='trip_calendar.php'>Ride Calendar</a></li>
 			<li><a href='logout.php'>Logout</a></li>
         </ul>
-        
     </div>
 </nav>
 
