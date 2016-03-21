@@ -12,7 +12,7 @@
 
  <style type='text/css'>
     #chat-box{
-        height: 100%;
+        height:500px;
     }
 </style>
 <div id='chat-box' class='col s3 push-s9 grey lighten-4'>
