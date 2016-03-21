@@ -4,12 +4,15 @@
 //Filename: join_event.php
 //Authors: Grace Lu and Joey Woodson 
 //Content: way to join the user to the trip at the moment 
+	error_reporting(E_ALL);
+	ini_set('display_errors',1);
 
 	require('database.php');
 	session_start();
 
 	$trip_id = $_POST['id'];
-	if($trip_id){
+	$_SESSION['trip_joined'] = $trip_id;
+	if(isset($trip_id)){
 		$query = $mysqli->prepare('select seats_available from trips where id = ?');
 		if(!$query){
 			printf("Query Prep Failed: %s\n", $mysqli->error);
@@ -17,7 +20,9 @@
 		}
 		$query->bind_param('i', $trip_id);
 		$query->execute();
+		$query->store_result();
 		$query->bind_result($seats_available);
+		$query->fetch(); 
 
 		if($seats_available >= 1){
 			//decrease seats available by one 
@@ -26,7 +31,8 @@
 				printf("Query Prep Failed: %s\n", $mysqli->error);
 				exit;
 			}
-			$joined_query->bind_param('ii', $seats_available-1, $trip_id);
+			$new_seats_available = $seats_available - 1;
+			$joined_query->bind_param('ii', $new_seats_available, $trip_id);
 			$joined_query->execute();
 
 			$_SESSION['joined'] = true;

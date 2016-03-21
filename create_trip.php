@@ -21,7 +21,6 @@ document.addEventListener('DOMContentLoaded', function() {
     session_start();
     login_check();
     include('navbar.php');
-	login_check();
 	
 	$username = trim($_SESSION['username']);
 	
