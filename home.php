@@ -13,13 +13,10 @@
         <title>Get A Ride</title>
         <!--Navbar-->
         <?php include("navbar.php");?>
-    </head>
-    <body>
-    <div class='row'>
         <!--Chat box-->
-        <?php include("chat_box.php");?>
+        <?php include("chat_box.php");?></head>
+    <body>
         
-        <div class="col s9 pull-s3" id="main">
         <div class="container">
             <h1 class="blue-grey-text">Your rides:</h1><br>
                 <table style='width:90%'>
@@ -56,7 +53,5 @@
                 </table><br>
                 <a href='http://54.213.111.166/~cse437/create_trip.php'>Post a new ride</a>
         </div> <!--/container-->
-        </div> <!--/main column-->
-    </div> <!--/row-->
     </body>
 </html>

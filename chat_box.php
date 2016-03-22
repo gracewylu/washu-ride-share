@@ -12,20 +12,29 @@
 
  <style type='text/css'>
     #chat-box{
-        height:500px;
+        position:fixed;
+        width:100px;
+        top:0; bottom:0; right:0;
+    }
+    #main-panel.chat-showing{
+        margin-right:100px;        
     }
 </style>
-<div id='chat-box' class='col s3 push-s9 grey lighten-4'>
+<div id='chat-box' class="grey lighten-3">
     Some text
 </div>
 
 <!--Add slideout behavior-->
 <script>
 $( "#chat-button" ).click(function() {
-    $("div #main").toggleClass( "s9 pull-s3" );
-    $("div #main").toggleClass( "s12" );
     $(this).toggleClass("white-text");
-    $("#chat-box").toggle();
+    $("#main-panel").toggleClass("chat-showing");
+    $("#chat-box").toggle("fold");
+});
+
+$( document ).ready(function() {
+    $("body").wrapInner('<div id="main-panel" class="chat-showing" />');
+    $("body").append(document.getElementById("chat-box"));
 });
 
 </script>
