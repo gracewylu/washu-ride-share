@@ -51,7 +51,7 @@
 			<form method="POST" action="join_event.php">
 			<td>test</td><td>test</td><td>test</td><td>test</td><td>test</td>
 			<input type="hidden" name="id" value="%d">
-			<td><button type="submit" class="waves-effect waves-light btn">Join</button></td>
+			<td><button type="submit" class="join-button waves-effect waves-light btn">Join</button></td>
 			</form>
 			</tr>
 			
@@ -85,19 +85,11 @@
                     $day = $datetime->format("m/d/y");
                     $time = $datetime->format("h:i");
 					
-					$new_entry = "<tr><form method='POST' action='join_event.php'><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><input type='hidden' name='id' value='%d'>";
-					
-					//need way to check if user is already in this trip
-					//if they are, display a disabled "Going" button instead
-					// if (isset($_SESSION['joined'])) {
-					// 	$new_entry .= "<td><button type='submit' class='btn disabled' disabled>Going</button></td></form></tr>";
-					// }
-					// else {
-					// 	$new_entry .= "<td><button type='submit' class='waves-effect waves-light btn'>Join</button></td></form></tr>";
-					// }
-					
-					
-					$new_entry .= "<td><button type='submit' class='waves-effect waves-light btn'>Join</button></td></form></tr>";
+					$new_entry = "<tr>
+									<td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td>
+									<input type='hidden' class='trip-id' value='%d'>
+									<td><button type='submit' class='join-button waves-effect waves-light btn'>Join</button></td>
+								</tr>";
 					
                     printf($new_entry, $day, $time, $pick_up_location, $drop_off_location, $driver_username, $id);
                 }
@@ -115,6 +107,18 @@
         $( document ).ready(function() {
             $(".button-collapse").sideNav();
             $('.modal-trigger').leanModal();
+			$('.join-button').click(function(){
+				//notify the database of the change and remove the row from the table
+				var tripId = $( this ).closest(".trip-id").value;
+				$.post("join_trip.php", { id: tripId }, function(data){
+					if (data.success) {
+                        $( this ).closest("tr").remove();
+                    }
+					else{
+						console.log(data.message);
+					}
+				}, "json");
+			});
         });
 	  </script>
     </body>
