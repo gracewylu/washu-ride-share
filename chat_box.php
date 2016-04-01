@@ -13,11 +13,11 @@
  <style type='text/css'>
     #chat-box{
         position:fixed;
-        width:100px;
+        width:200px;
         top:0; bottom:0; right:0;
     }
     #main-panel.chat-showing{
-        margin-right:100px;        
+        margin-right:200px;        
     }
 </style>
 <div id='chat-box' class="grey lighten-3">

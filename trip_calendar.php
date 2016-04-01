@@ -19,6 +19,7 @@
 		
 		<!--Navbar-->
      <?php include("navbar.php");?>
+	 <?php include("chat_box.php");?>
     </head>
     <body>
 		<div class='container'>
