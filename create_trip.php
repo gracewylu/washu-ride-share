@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
     require('database.php');
     session_start();
     include('navbar.php');
+	include('chat_box.php');
 	login_check();
 	
 	$username = trim($_SESSION['username']);
