@@ -54,7 +54,7 @@
 			<form method="POST" action="join_event.php">
 			<td>test</td><td>test</td><td>test</td><td>test</td><td>test</td>
 			<input type="hidden" name="id" value="%d">
-			<td><button type="submit" class="waves-effect waves-light btn">Join</button></td>
+			<td><button type="submit" class="join-button waves-effect waves-light btn">Join</button></td>
 			</form>
 			</tr>
 			
@@ -107,7 +107,6 @@
 					</script>					
 					<?php unset($_SESSION['trip_joined']);
 					}
-									
                 }
             ?>
 			
@@ -123,6 +122,18 @@
         $( document ).ready(function() {
             $(".button-collapse").sideNav();
             $('.modal-trigger').leanModal();
+			$('.join-button').click(function(){
+				//notify the database of the change and remove the row from the table
+				var tripId = $( this ).closest(".trip-id").value;
+				$.post("join_trip.php", { id: tripId }, function(data){
+					if (data.success) {
+                        $( this ).closest("tr").remove();
+                    }
+					else{
+						console.log(data.message);
+					}
+				}, "json");
+			});
         });
 	  </script>
     </body>
