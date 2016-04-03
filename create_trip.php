@@ -9,9 +9,9 @@
 </head>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById("date").valueAsDate = new Date();
-}, false);
+	// document.addEventListener('DOMContentLoaded', function() {
+ //    	document.getElementById("date").value = new Date();
+	// }, false);
 </script>
 
 <body>
@@ -19,39 +19,31 @@ document.addEventListener('DOMContentLoaded', function() {
 <?php
     require('database.php');
     session_start();
-    login_check();
     include('navbar.php');
+	login_check();
 	
 	$username = trim($_SESSION['username']);
-	
-	//check if user has car
-	$cars;
-	$query = $mysqli->prepare("select car_id, make, year from cars where owner='".$username."';");
-	if(!$query){
-		exit;
-	}
-	$query->execute();
-	
-	$result = $query->get_result();
-	$i=0;
-	while($row=$result->fetch_assoc()){
-		$cars[$i]["name"] = $row["year"]." ".$row["make"];
-		$cars[$i]["id"] = $row["car_id"];
-	}
 ?>
   <div class='container'>
-	<div class="row">
+	<div class="row" style="padding-top: 30px;">
 		<form class="col s12" action="new_trip.php" method="POST">
 		  <div class="row">
 			  <div class="input-field col s6">
 			  <input type="date" class="datepicker" id="date" name="date">
 			  <label for="date">Date</label>
 			</div>
+		  </div>	
+
+		  <div class="row">
+			  <div class="input-field col s6">
+			  <input id="pick_up_location" name="pick_up_location" type="text" class="validate"/>
+			  <label for="pick_up_location">Pick-up Location</label>
+			</div>
 		  </div>
-		  
+
 		  <div class="row">
 			<div class="input-field col s6">
-				<select name="time" id="time">
+				<select name="start_time" id="start_time">
 					<option value="0">12:00 AM</option>
 					<?php for($h=1; $h<12; $h++){
 						for ($m=0.0; $m<60; $m+=15){
@@ -65,42 +57,84 @@ document.addEventListener('DOMContentLoaded', function() {
 						}
 					}?>
 				</select>
-				<label>Time</label>
-			</div>
-		</div>
-		  
-		  <div class="row">
-			  <div class="input-field col s6">
-			  <input id="pick_up_location" name="pick_up_location" type="text" class="validate"/>
-			  <label for="pick_up_location">Pick-up Location</label>
+				<label for="start_time">Start time</label>
 			</div>
 		  </div>
-		  <div class="row">
+
+			<div class="row">
 			  <div class="input-field col s6">
 			  <input id="drop_off_location" name="drop_off_location" type="text" class="validate">
 			  <label for="drop_off_location">Drop-off Location</label>
 			</div>
-		  </div>
-		 
+			</div>
 		  <div class="row">
 			<div class="input-field col s6">
-				<select>
-					<option value="">Select a car</option>
-					<?php foreach ($cars as $car){
-						echo "<option value='".htmlentities($car["id"])."'>".htmlentities($car["name"])."</option>";
-					}?>	
+				<select name="end_time" id="end_time">
+					<option value="0">12:00 AM</option>
+					<?php for($h=1; $h<12; $h++){
+						for ($m=0.0; $m<60; $m+=15){
+							printf("<option value=%d>%d:%02d AM </option>/n", $h+$m/60.0, $h, $m);
+						}
+					}?>
+					<option value="12" selected>12:00 PM</option>
+					<?php for($h=13; $h<24; $h++){
+						for ($m=0.0; $m<60; $m+=15){
+							printf("<option value=%d>%d:%02d PM </option>/n", $h+$m/60.0, $h-12, $m);
+						}
+					}?>
 				</select>
-				<label>Car</label>
+				<label for="end_time">End time</label>
 			</div>
 		  </div>
-		  
+
 		  <div class="row">
-			  <div class="input-field col s6">
-			  <input id="seats_available" name="seats_available" type="number" class="validate" value="1" min="1" max="5">
-			  <label for="seats_available">Available Seats</label>
+			<div class="input-field col s6">
+				<select name="return_time" id="return_time">
+					<option value="0">12:00 AM</option>
+					<?php for($h=1; $h<12; $h++){
+						for ($m=0.0; $m<60; $m+=15){
+							printf("<option value=%d>%d:%02d AM </option>/n", $h+$m/60.0, $h, $m);
+						}
+					}?>
+					<option value="12" selected>12:00 PM</option>
+					<?php for($h=13; $h<24; $h++){
+						for ($m=0.0; $m<60; $m+=15){
+							printf("<option value=%d>%d:%02d PM </option>/n", $h+$m/60.0, $h-12, $m);
+						}
+					}?>
+				</select>
+				<label for="return_time">Return time (optional)</label>
 			</div>
 		  </div>
-	   
+		<div class="row">
+        <div class="col s12 m6">
+          <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+              <span class="card-title">Car I'm driving (optional)</span>
+				<div class="row">
+			  		<div class="input-field col s6">
+			  			<input id="seats" name="seats" type="text">
+			  			<label for="seats">Seats</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s6">
+			  			<input id="model" name="model" type="text">
+			  			<label for="model">Model</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s6">
+			  			<input id="color" name="color" type="text">
+			  			<label for="color">Color</label>
+					</div>
+				</div>
+		  		</div>             
+            </div>
+          </div>
+        </div>
+      </div>
+            	   
 		<input type="hidden" name="username" value="%d">
 	   
 		  <div class="row"> 
@@ -121,6 +155,8 @@ document.addEventListener('DOMContentLoaded', function() {
       <script>
 		//Set document ready function so mobile navbar button works
         $( document ).ready(function() {
+        	//sets current date as placeholder 
+        	$('#date').attr("placeholder", Date());
             $(".button-collapse").sideNav();
             $('.modal-trigger').leanModal();
         });
@@ -128,6 +164,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		//Set up for datepickers
 		$('.datepicker').pickadate({
 			selectMonths: true, // Creates a dropdown to control month
+
 		  });
 		
 		//setup for materialize select
