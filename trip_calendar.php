@@ -20,6 +20,9 @@
 		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<!--Import materialize.css-->
 		<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+		<!--jQuery Link-->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.js"></script>
+
 
 		<!--Let browser know website is optimized for mobile-->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -85,13 +88,25 @@
                     $day = $datetime->format("m/d/y");
                     $time = $datetime->format("h:i");
 					
-					$new_entry = "<tr>
-									<td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td>
-									<input type='hidden' class='trip-id' value='%d'>
-									<td><button type='submit' class='join-button waves-effect waves-light btn'>Join</button></td>
-								</tr>";
+					$new_entry = "<tr><form method='POST' action='join_event.php'><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><input type='hidden' name='id' value='%d'>";
+					$new_entry .= '<td><button type="submit" class="waves-effect waves-light btn" id="'.$id.'">Join</button></td></form></tr>';
+					printf($new_entry, $day, $time, $pick_up_location, $drop_off_location, $driver_username, $id);
+
 					
-                    printf($new_entry, $day, $time, $pick_up_location, $drop_off_location, $driver_username, $id);
+					//need way to check if user is already in this trip
+					//if they are, display a disabled "Going" button instead
+					if(isset($_SESSION['trip_joined'])){ 
+					?>
+					<script type="text/javascript">
+						//doesn't seem to be going into the script tags
+
+							//change button to going instead
+							var buttonId = '#' + <?php echo $_SESSION['trip_joined'];?>;
+							$(buttonId).toggleClass("disabled");
+							$(buttonId).html('Going');
+					</script>					
+					<?php unset($_SESSION['trip_joined']);
+					}
                 }
             ?>
 			
