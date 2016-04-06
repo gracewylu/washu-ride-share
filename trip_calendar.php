@@ -1,7 +1,7 @@
 
 <?php
 //Filename: trip_calendar.php
-//Author: Sam Teeter
+//Author: Sam Teeter, Joey Woodson
 //Content: page to display all public trips
     require("database.php");
     session_start();
@@ -38,74 +38,49 @@
 		<!-- search bar here -->
 	
         <table style='width:100%'>
-			<thead>
-            <tr class='table-h1'>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Pick up</th>
-                <th>Drop off</th>
-                <th>Driver</th>
-            </tr>
-			</thead>
+            <thead>
+                <tr class='table-h1'>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Pick-up Location</th>
+                    <th>Drop-off Location</th>
+                    <th>Number Going</th>
+                </tr>
+            </thead>
 			
-			
-			<!--Test table entries -->
-			<tr>
-			<form method="POST" action="join_event.php">
-			<td>test</td><td>test</td><td>test</td><td>test</td><td>test</td>
-			<input type="hidden" name="id" value="%d">
-			<td><button type="submit" class="join-button waves-effect waves-light btn">Join</button></td>
-			</form>
-			</tr>
-			
-			<tr>
-			<form method="POST" action="join_event.php">
-			<td>test</td><td>test</td><td>test</td><td>test</td><td>test</td>
-			<input type="hidden" name="id" value="%d">
-			<td><button type="submit" class="btn disabled" disabled>Going</button></td>
-			</form>
-			</tr>
-			
-            <?php
+<?php
                 //display list of elements grouped by day, with list section headings showing the days
                 //TODO: give user option to select date range, possibly change how trips are sorted
                 //TODO: link to some kind of details page for each trip where they can view more information
 				
-                $query = $mysqli->prepare("select date, pick_up_location, drop_off_location, driver_username, id
+                $query = $mysqli->prepare("select depart_time, arrive_time, return_time, pick_up_location, drop_off_location, number_going, id
                                           from trips
-                                          where date between date_sub(now(), INTERVAL 1 week) and now()
-                                          order by date asc");
+                                          where depart_time >= now()
+                                          order by depart_time asc");
                 if (!$query){
                     error_log("Could not prepare trips query");
                     exit;
                 }
                 $query->execute();
-                $query->bind_result($date, $pick_up_location, $drop_off_location, $driver_username, $id);
+                $query->bind_result($depart_date, $arrive_date, $return_date, $pick_up_location, $drop_off_location, $number_going, $id);
                 
                 //grabs the info of trip from query 
                 while($query->fetch()){
-                    $datetime = new DateTime($date);
+                    $datetime = new DateTime($depart_date);
                     $day = $datetime->format("m/d/y");
                     $time = $datetime->format("h:i");
 					
-					$new_entry = "<tr><form method='POST' action='join_event.php'><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><input type='hidden' name='id' value='%d'>";
+					$new_entry = "            <tr><form method='POST' action='join_trip.php'><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><input type='hidden' name='id' value='%d'>";
 					$new_entry .= '<td><button type="submit" class="waves-effect waves-light btn" id="'.$id.'">Join</button></td></form></tr>';
-					printf($new_entry, $day, $time, $pick_up_location, $drop_off_location, $driver_username, $id);
+					$new_entry .= "\n";
 
 					
 					//need way to check if user is already in this trip
 					//if they are, display a disabled "Going" button instead
 					if(isset($_SESSION['trip_joined'])){ 
-					?>
-					<script type="text/javascript">
-						//doesn't seem to be going into the script tags
-
-							//change button to going instead
-							var buttonId = '#' + <?php echo $_SESSION['trip_joined'];?>;
-							$(buttonId).toggleClass("disabled");
-							$(buttonId).html('Going');
-					</script>					
-					<?php unset($_SESSION['trip_joined']);
+					    unset($_SESSION['trip_joined']);
+					} else {
+					    printf($new_entry, $day, $time, $pick_up_location, $drop_off_location, $number_going, $id);
 					}
                 }
             ?>
