@@ -107,7 +107,13 @@
 					data:{id:tripId},
 					success: function(data){
 						if (data.success) {
-						    $("#"+data.joined_trip_id+".join-button").closest("tr").fadeOut(400,function(){this.remove()});
+						    $("#"+data.joined_trip_id+".join-button")
+							.closest("tr")
+							.children('td')
+					        .animate({ padding: 0 })
+					        .wrapInner('<div />')
+					        .children()
+					        .slideUp(function() { $(this).closest('tr').remove()});
 						}
 						else{
 							console.log(data.message);
