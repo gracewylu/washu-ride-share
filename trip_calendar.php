@@ -107,7 +107,7 @@
 					data:{id:tripId},
 					success: function(data){
 						if (data.success) {
-						    $("#"+data.joined_trip_id+".join-button").closest("tr").remove();
+						    $("#"+data.joined_trip_id+".join-button").closest("tr").fadeOut(400,function(){this.remove()});
 						}
 						else{
 							console.log(data.message);
