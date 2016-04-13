@@ -1,13 +1,15 @@
-<!doctype html>
 <?php
 
 //Filename: join_event.php
 //Authors: Grace Lu and Joey Woodson 
-//Content: way to join the user to the trip at the moment 
+//Content: way to join the user to the trip at the moment
+
+	//configure page to accept json data
+	header("Content-Type: application/json");
 
 	require('database.php');
 	session_start();
-
+			
 	$trip_id = $_POST['id'];
 	$username = $_SESSION['username'];
 	
@@ -36,6 +38,8 @@
 	$join_query2->close();
 	
 	echo json_encode(array(
-		"success"=>true
+		"success"=>true,
+		"joined_trip_id"=>$trip_id
 	));
+	
 ?>
