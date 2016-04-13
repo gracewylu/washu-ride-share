@@ -107,8 +107,7 @@
 					data:{id:tripId},
 					success: function(data){
 						if (data.success) {
-							console.log("success");
-						    $( this ).closest("tr").remove();
+						    $("#"+data.joined_trip_id+".join-button").closest("tr").remove();
 						}
 						else{
 							console.log(data.message);

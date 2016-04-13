@@ -38,7 +38,8 @@
 	$join_query2->close();
 	
 	echo json_encode(array(
-		"success"=>true
+		"success"=>true,
+		"joined_trip_id"=>$trip_id
 	));
 	
 ?>
