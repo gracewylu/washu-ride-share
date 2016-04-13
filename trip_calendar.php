@@ -53,6 +53,7 @@
                 //TODO: give user option to select date range, possibly change how trips are sorted
                 //TODO: link to some kind of details page for each trip where they can view more information
 				
+				//modify this so trips the user is currently on are not selected!
                 $query = $mysqli->prepare("select depart_time, arrive_time, return_time, pick_up_location, drop_off_location, number_going, id
                                           from trips
                                           where depart_time >= now()
