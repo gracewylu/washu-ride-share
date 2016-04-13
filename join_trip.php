@@ -1,4 +1,3 @@
-<!doctype html>
 <?php
 
 //Filename: join_event.php
@@ -6,11 +5,11 @@
 //Content: way to join the user to the trip at the moment
 
 	//configure page to accept json data
-	header("Content-Type: application/json", true);
+	header("Content-Type: application/json");
 
 	require('database.php');
 	session_start();
-		
+			
 	$trip_id = $_POST['id'];
 	$username = $_SESSION['username'];
 	
@@ -41,4 +40,5 @@
 	echo json_encode(array(
 		"success"=>true
 	));
+	
 ?>

@@ -113,6 +113,9 @@
 						else{
 							console.log(data.message);
 						}
+					},
+					error:function(jqxhr, textStatus, errorThrown){
+						console.log(textStatus, errorThrown);
 					}
 				}
 				$.ajax(ajaxData);
