@@ -70,8 +70,8 @@
                     $day = $datetime->format("m/d/y");
                     $time = $datetime->format("h:i");
 					
-					$new_entry = "            <tr><form method='POST' action='join_trip.php'><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><input type='hidden' name='id' value='%d'>";
-					$new_entry .= '<td><button type="submit" class="waves-effect waves-light btn" id="'.$id.'">Join</button></td></form></tr>';
+					$new_entry = "            <tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><input type='hidden' name='id' value='%d'>";
+					$new_entry .= '<td><button type="submit" class="waves-effect waves-light btn join-button" id="'.$id.'">Join</button></td></tr>';
 					$new_entry .= "\n";
 
 					
@@ -99,15 +99,23 @@
             $('.modal-trigger').leanModal();
 			$('.join-button').click(function(){
 				//notify the database of the change and remove the row from the table
-				var tripId = $( this ).closest(".trip-id").value;
-				$.post("join_trip.php", { id: tripId }, function(data){
-					if (data.success) {
-                        $( this ).closest("tr").remove();
-                    }
-					else{
-						console.log(data.message);
+				var tripId = $(this).closest("tr").children("input[name=id]")[0].value;
+				var ajaxData = {
+					url: "join_trip.php",
+					type: "POST",
+					dataType:"json",
+					data:{id:tripId},
+					success: function(data){
+						if (data.success) {
+							console.log("success");
+						    $( this ).closest("tr").remove();
+						}
+						else{
+							console.log(data.message);
+						}
 					}
-				}, "json");
+				}
+				$.ajax(ajaxData);
 			});
         });
 	  </script>
