@@ -40,6 +40,12 @@
 			  <label for="pick_up_location">Pick-up Location</label>
 			</div>
 		  </div>
+		  <div class="row">
+			  <div class="input-field col s6">
+			  <input id="drop_off_location" name="drop_off_location" type="text" class="validate">
+			  <label for="drop_off_location">Drop-off Location</label>
+			</div>
+		</div>
 
 		  <div class="row">
 			<div class="input-field col s6">
@@ -61,12 +67,7 @@
 			</div>
 		  </div>
 
-			<div class="row">
-			  <div class="input-field col s6">
-			  <input id="drop_off_location" name="drop_off_location" type="text" class="validate">
-			  <label for="drop_off_location">Drop-off Location</label>
-			</div>
-			</div>
+			
 		  <div class="row">
 			<div class="input-field col s6">
 				<select name="end_time" id="end_time">
@@ -133,7 +134,6 @@
             </div>
           </div>
         </div>
-      </div>
             	   
 		<input type="hidden" name="username" value="%d">
 	   
