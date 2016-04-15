@@ -1,0 +1,85 @@
+<?php
+//Filename: trip_calendar.php
+//Author: Sam Teeter, Joey Woodson
+//Content: page to display all public trips
+    require("database.php");
+    session_start();
+    login_check();
+    date_default_timezone_set("UTC");
+    
+    //display upcoming trip events in a sectioned list
+    //TODO: create search bar where they can narrow results by date, location
+?>
+
+<!DOCTYPE html>
+<html>
+    <head>
+		
+        <title>About</title>
+		
+		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<!--Import materialize.css-->
+		<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+		<!--jQuery Link-->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.js"></script>
+
+
+		<!--Let browser know website is optimized for mobile-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		
+
+		<!--Navbar-->
+     <?php include("navbar.php");?>
+    </head>
+    <body>
+	
+		<div>
+		  <ul class="side-nav fixed">
+			<li><a href="#!" style="display:block">First Sidebar Link</a></li>
+			<li><a href="#!" style="display:block">Second Sidebar Link</a></li>
+		  </ul>
+		  <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+		</div>
+        
+		<div style="padding-left: 240px;">
+		<ul class="collapsible" data-collapsible="expandable">
+			<li>
+			  <div class="collapsible-header">What is WashU Ride Share?</div>
+			  <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+			</li>
+			<li>
+			  <div class="collapsible-header">Is it free?</div>
+			  <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+			</li>
+			<li>
+			  <div class="collapsible-header">Third</div>
+			  <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+			</li>
+		</ul>
+        </div>
+		
+		<!--Finish Materialize setup-->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="js/materialize.min.js"></script>
+        <!--Set document ready function so mobile navbar button works:-->
+
+		<script>		
+        $( document ).ready(function() {
+            $(".button-collapse").sideNav();
+            $('.modal-trigger').leanModal();
+			$('.join-button').click(function(){
+				//notify the database of the change and remove the row from the table
+				var tripId = $( this ).closest(".trip-id").value;
+				$.post("join_trip.php", { id: tripId }, function(data){
+					if (data.success) {
+                        $( this ).closest("tr").remove();
+                    }
+					else{
+						console.log(data.message);
+					}
+				}, "json");
+			});
+        });
+	  </script>
+    </body>
+</html>
