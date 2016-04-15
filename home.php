@@ -25,32 +25,36 @@
             <table style='width:90%'>
                 <tr>
                     <th><b>Date</b></th>
-                    <th><b>Time</b></th>
+                    <th><b>Depart:</b></th>
+                    <th><b>Arrive:</b></th>
                     <th><b>Pick up at:</b></th>
                     <th><b>Drop off at:</b></th>
-                    <th><b>Driver</b></th>
+                    <th><b>Number going:</b></th>
                 </tr>
         <?php
             $username = $_SESSION['username'];
             //fetch trips the user is part of
-            $trip_request = $mysqli->prepare("select date, pick_up_location, drop_off_location, driver_username
+            $trip_request = $mysqli->prepare("select depart_time, arrive_time, pick_up_location, drop_off_location, number_going
                                              from trips join trips2users on trips.id = trips2users.trip_id
-                                             where trips2users.username = ?");
+                                             where trips2users.username = ? and depart_time >= now()
+                                             order by depart_time asc");
             if (!$trip_request){
-                error_log("Could not prepare trip request.");
+                error_log($mysqli->error);
                 exit;
             }
             $trip_request->bind_param("s", $username);
             $trip_request->execute();
-            $trip_request->bind_result($date, $pick_up_location, $drop_off_location, $driver_username);
+            $trip_request->bind_result($depart_time, $arrive_time, $pick_up_location, $drop_off_location, $number_going);
             
             //print out trip data in table
             while($trip_request->fetch()){
-                $datetime = new DateTime($date);
-                $day = $datetime->format("m/d/y");
-                $time = $datetime->format("h:i");
-                printf("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>",
-                       $day, $time, $pick_up_location, $drop_off_location, $driver_username);
+                $depart_datetime = new DateTime($depart_time);
+                $arrive_datetime = new DateTime($arrive_time);
+                $depart_day = $depart_datetime->format("m/d/y");
+                $depart_time = $depart_datetime->format("h:i");
+                $arrive_time = $arrive_datetime->format("h:i");
+                printf("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>",
+                       $depart_day, $depart_time, $arrive_time, $pick_up_location, $drop_off_location, $number_going);
             }
         ?>
             </table><br>
