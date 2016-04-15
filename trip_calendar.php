@@ -53,15 +53,23 @@
                 //TODO: give user option to select date range, possibly change how trips are sorted
                 //TODO: link to some kind of details page for each trip where they can view more information
 				
-				//modify this so trips the user is currently on are not selected!
-                $query = $mysqli->prepare("select depart_time, arrive_time, return_time, pick_up_location, drop_off_location, number_going, id
-                                          from trips
-                                          where depart_time >= now()
-                                          order by depart_time asc");
+				//this query selects info for trips that the user is NOT currently on
+				//and manually counts the number of people going for each trip
+                $query = $mysqli->prepare("select depart_time, arrive_time, return_time, pick_up_location, drop_off_location, count(*), id 
+											from trips 
+											join trips2users as tu1
+											on tu1.trip_id = trips.id and not exists(
+												select 1 from trips2users as tu2
+												where tu2.trip_id = tu1.trip_id and tu2.username = ?
+												)
+											where depart_time >= now()
+											group by id
+											order by depart_time asc");
                 if (!$query){
                     error_log("Could not prepare trips query");
                     exit;
                 }
+				$query->bind_param("s", $_SESSION['username']);
                 $query->execute();
                 $query->bind_result($depart_date, $arrive_date, $return_date, $pick_up_location, $drop_off_location, $number_going, $id);
                 
@@ -75,14 +83,7 @@
 					$new_entry .= '<td><button type="submit" class="waves-effect waves-light btn join-button" id="'.$id.'">Join</button></td></tr>';
 					$new_entry .= "\n";
 
-					
-					//need way to check if user is already in this trip
-					//if they are, display a disabled "Going" button instead
-					if(isset($_SESSION['trip_joined'])){ 
-					    unset($_SESSION['trip_joined']);
-					} else {
-					    printf($new_entry, $day, $time, $pick_up_location, $drop_off_location, $number_going, $id);
-					}
+					printf($new_entry, $day, $time, $pick_up_location, $drop_off_location, $number_going, $id);
                 }
             ?>
 			
