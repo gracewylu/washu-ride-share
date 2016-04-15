@@ -13,6 +13,29 @@
 	$trip_id = $_POST['id'];
 	$username = $_SESSION['username'];
 	
+	//check that the user is not already on this trip
+	$check_dup = $mysqli->prepare("select exists (select 1 from trips2users where trip_id=? and username=?)");
+	if(!$check_dup) {
+	    echo json_encode(array(
+			"success" => false,
+			"message" => $mysqli->error
+		));
+	}
+	$check_dup->bind_param("is", $trip_id, $username);
+	$check_dup->execute();
+	$check_dup->bind_result($exists);
+	$check_dup->fetch();
+	if($exists){
+		echo json_encode(array(
+			"success"=>false,
+			"message"=>"User is already on this trip"
+		));
+		$check_dup->close();
+		exit;
+	}
+	$check_dup->close();
+	
+	
 	$join_query1 = $mysqli->prepare('update trips set number_going = number_going+1 where id = ?');
 	if(!$join_query1) {
 	    echo json_encode(array(
@@ -21,7 +44,7 @@
 		));
 	}
 	
-	$join_query2 = $mysqli->prepare('insert into trips2users(trip_id, username, driving) values (?, ?, ?)');
+	$join_query2 = $mysqli->prepare('insert ignore into trips2users(trip_id, username, driving) values (?, ?, ?)');
 	if(!$join_query2) {
 	    echo json_encode(array(
 			"success" => false,
