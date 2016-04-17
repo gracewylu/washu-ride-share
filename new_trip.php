@@ -25,8 +25,8 @@
     
     $insert_query = $mysqli->prepare("insert into trips (pick_up_location, drop_off_location, driver_username, date, seats_available)
                                      values (?, ?, ?, ?, ?);");
-    $insert_trip_query = $mysqli->prepare("insert into trips2users (trip_id, username)
-                                     values (LAST_INSERT_ID(),?);");
+    $insert_trip_query = $mysqli->prepare("insert into trips2users (trip_id, username, is_owner)
+                                     values (LAST_INSERT_ID(), ?, 1);");
     if (!$insert_query){
         error_log("Failed to prepare new trip query");
     }
