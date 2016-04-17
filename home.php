@@ -34,7 +34,7 @@
         <?php
             $username = $_SESSION['username'];
             //fetch trips the user is part of
-            $trip_request = $mysqli->prepare("select id, depart_time, arrive_time, pick_up_location, drop_off_location, number_going
+            $trip_request = $mysqli->prepare("select id, depart_time, arrive_time, pick_up_location, drop_off_location, number_going, is_owner
                                              from trips join trips2users on trips.id = trips2users.trip_id
                                              where trips2users.username = ? and depart_time >= now()
                                              order by depart_time asc");
@@ -44,7 +44,7 @@
             }
             $trip_request->bind_param("s", $username);
             $trip_request->execute();
-            $trip_request->bind_result($trip_id, $depart_time, $arrive_time, $pick_up_location, $drop_off_location, $number_going);
+            $trip_request->bind_result($trip_id, $depart_time, $arrive_time, $pick_up_location, $drop_off_location, $number_going, $is_owner);
             
             //print out trip data in table
             while($trip_request->fetch()){
@@ -55,8 +55,12 @@
                 $arrive_time = $arrive_datetime->format("h:i");
                 $leave_button = "<td><button type='submit' class='waves-effect waves-light btn leave-button' id='".$trip_id."'>Leave</button></td>";
                 $cancel_button = "<td><button type='submit' class='waves-effect waves-light btn red-darken2 cancel-button' id='".$trip_id."'>Cancel Trip</button></td>";
+                $button = $leave_button;
+                if ($is_owner){
+                    $button = $cancel_button;
+                }
                 printf("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td>%s</tr>",
-                       $depart_day, $depart_time, $arrive_time, $pick_up_location, $drop_off_location, $number_going, $leave_button);
+                       $depart_day, $depart_time, $arrive_time, $pick_up_location, $drop_off_location, $number_going, $button);
             }
         ?>
             </table><br>
@@ -80,8 +84,8 @@
                     dataType:"json",
                     data:{trip_id:event.target.id},
                     success:function(data){
-                        console.log("Success");
                         if (data.success) {
+                            console.log("success");
 						    $("#"+data.left_trip_id+".leave-button")
 							.closest("tr")
 							.children('td')
@@ -98,7 +102,6 @@
 						console.log(textStatus, errorThrown);
 					}
                 });
-                console.log("Fired ajax");
             });
         });
       </script>
