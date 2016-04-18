@@ -169,6 +169,44 @@
 		
 		//setup for materialize select
 		$('select').material_select();
+		
+		//query database in real time for matching trips
+		var search_params = {depart_time:"", arrive_time:"", pick_up_location:"", drop_off_location:""};
+		function search(params){
+			$.ajax({
+				method:"POST",
+				url:"new_trip_search.php",
+				data:{params},
+				success:function(data){
+					if (data.success) {
+						//display search results
+						console.log("success");
+					}
+					else{
+						console.log(data.message);
+					}
+				},
+				error: function (xhr, ajaxOptions, thrownError) {
+					console.log(xhr.status);
+					console.log(thrownError);
+				}
+			});
+		}
+		
+		
 	  </script>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
