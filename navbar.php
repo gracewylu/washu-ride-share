@@ -17,7 +17,7 @@ nav ul li a{
         <a href='#' data-activates='sidebar' class='button-collapse'><i class='material-icons'>menu</i></a>
         <ul id='nav-mobile' class='right hide-on-med-and-down'>
             <li><a href='home.php'>My Rides</a></li>
-            <li><a href='trip_calendar.php'>Ride Calendar</a></li>
+            <li><a href='trip_calendar.php'>Find a Ride</a></li>
 			<li><a href='logout.php'>Logout</a></li>
         </ul>
         <ul class='side-nav' id='sidebar'>
