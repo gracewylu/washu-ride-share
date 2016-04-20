@@ -1,7 +1,7 @@
 
 <?php
 //Filename: trip_calendar.php
-//Author: Sam Teeter
+//Author: Sam Teeter, Joey Woodson
 //Content: page to display all public trips
     require("database.php");
     session_start();
@@ -38,75 +38,52 @@
 		<!-- search bar here -->
 	
         <table style='width:100%'>
-			<thead>
-            <tr class='table-h1'>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Pick up</th>
-                <th>Drop off</th>
-                <th>Driver</th>
-            </tr>
-			</thead>
+            <thead>
+                <tr class='table-h1'>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Pick-up Location</th>
+                    <th>Drop-off Location</th>
+                    <th>Number Going</th>
+                </tr>
+            </thead>
 			
-			
-			<!--Test table entries -->
-			<tr>
-			<form method="POST" action="join_event.php">
-			<td>test</td><td>test</td><td>test</td><td>test</td><td>test</td>
-			<input type="hidden" name="id" value="%d">
-			<td><button type="submit" class="join-button waves-effect waves-light btn">Join</button></td>
-			</form>
-			</tr>
-			
-			<tr>
-			<form method="POST" action="join_event.php">
-			<td>test</td><td>test</td><td>test</td><td>test</td><td>test</td>
-			<input type="hidden" name="id" value="%d">
-			<td><button type="submit" class="btn disabled" disabled>Going</button></td>
-			</form>
-			</tr>
-			
-            <?php
+<?php
                 //display list of elements grouped by day, with list section headings showing the days
                 //TODO: give user option to select date range, possibly change how trips are sorted
                 //TODO: link to some kind of details page for each trip where they can view more information
 				
-                $query = $mysqli->prepare("select date, pick_up_location, drop_off_location, driver_username, id
-                                          from trips
-                                          where date between date_sub(now(), INTERVAL 1 week) and now()
-                                          order by date asc");
+				//this query selects info for trips that the user is NOT currently on
+				//and manually counts the number of people going for each trip
+                $query = $mysqli->prepare("select depart_time, arrive_time, return_time, pick_up_location, drop_off_location, count(*), id 
+											from trips 
+											join trips2users as tu1
+											on tu1.trip_id = trips.id and not exists(
+												select 1 from trips2users as tu2
+												where tu2.trip_id = tu1.trip_id and tu2.username = ?
+												)
+											where depart_time >= now()
+											group by id
+											order by depart_time asc");
                 if (!$query){
                     error_log("Could not prepare trips query");
                     exit;
                 }
+				$query->bind_param("s", $_SESSION['username']);
                 $query->execute();
-                $query->bind_result($date, $pick_up_location, $drop_off_location, $driver_username, $id);
+                $query->bind_result($depart_date, $arrive_date, $return_date, $pick_up_location, $drop_off_location, $number_going, $id);
                 
                 //grabs the info of trip from query 
                 while($query->fetch()){
-                    $datetime = new DateTime($date);
+                    $datetime = new DateTime($depart_date);
                     $day = $datetime->format("m/d/y");
                     $time = $datetime->format("h:i");
 					
-					$new_entry = "<tr><form method='POST' action='join_event.php'><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><input type='hidden' name='id' value='%d'>";
-					$new_entry .= '<td><button type="submit" class="waves-effect waves-light btn" id="'.$id.'">Join</button></td></form></tr>';
-					printf($new_entry, $day, $time, $pick_up_location, $drop_off_location, $driver_username, $id);
+					$new_entry = "            <tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><input type='hidden' name='id' value='%d'>";
+					$new_entry .= '<td><button type="submit" class="waves-effect waves-light btn join-button" id="'.$id.'">Join</button></td></tr>';
+					$new_entry .= "\n";
 
-					
-					//need way to check if user is already in this trip
-					//if they are, display a disabled "Going" button instead
-					if(isset($_SESSION['trip_joined'])){ 
-					?>
-					<script type="text/javascript">
-						//doesn't seem to be going into the script tags
-
-							//change button to going instead
-							var buttonId = '#' + <?php echo $_SESSION['trip_joined'];?>;
-							$(buttonId).toggleClass("disabled");
-							$(buttonId).html('Going');
-					</script>					
-					<?php unset($_SESSION['trip_joined']);
-					}
+					printf($new_entry, $day, $time, $pick_up_location, $drop_off_location, $number_going, $id);
                 }
             ?>
 			
@@ -124,15 +101,31 @@
             $('.modal-trigger').leanModal();
 			$('.join-button').click(function(){
 				//notify the database of the change and remove the row from the table
-				var tripId = $( this ).closest(".trip-id").value;
-				$.post("join_trip.php", { id: tripId }, function(data){
-					if (data.success) {
-                        $( this ).closest("tr").remove();
-                    }
-					else{
-						console.log(data.message);
+				var tripId = $(this).closest("tr").children("input[name=id]")[0].value;
+				var ajaxData = {
+					url: "join_trip.php",
+					type: "POST",
+					dataType:"json",
+					data:{id:tripId},
+					success: function(data){
+						if (data.success) {
+						    $("#"+data.joined_trip_id+".join-button")
+							.closest("tr")
+							.children('td')
+					        .animate({ padding: 0 })
+					        .wrapInner('<div />')
+					        .children()
+					        .slideUp(function() { $(this).closest('tr').remove()});
+						}
+						else{
+							console.log(data.message);
+						}
+					},
+					error:function(jqxhr, textStatus, errorThrown){
+						console.log(textStatus, errorThrown);
 					}
-				}, "json");
+				}
+				$.ajax(ajaxData);
 			});
         });
 	  </script>
