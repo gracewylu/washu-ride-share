@@ -63,7 +63,7 @@
     $true = 1; 
     $false = 0; 
     
-    echo "<br>".$last_id."<br>".$driver."<br>".$last_car_id;
+    //echo "<br>".$last_id."<br>".$driver."<br>".$last_car_id;
     $trip_to_user->bind_param("isiii", $last_id, $driver, $true, $last_car_id, $true);
     $trip_to_user->execute();
     $trip_to_user->close();

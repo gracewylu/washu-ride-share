@@ -24,7 +24,6 @@
   <div class='container'>
 	<div class="row" style="padding-top: 30px;">
 		<form class="col s12" action="new_trip.php" method="POST">
-<<<<<<< HEAD
 			<div class="row">
 				<div class="input-field col s6">
 			  		<input type="date" class="datepicker required" id="date" name="date" required>
@@ -37,28 +36,6 @@
 			  		<label for="pick_up_location">Pick-up Location</label>
 				</div>
 		  	</div>
-=======
-		  <div class="row">
-			  <div class="input-field col s6">
-			  <input type="date" class="datepicker" id="date" name="date">
-			  <label for="date">Date</label>
-			</div>
-		  </div>	
-
-		  <div class="row">
-			  <div class="input-field col s6">
-			  <input id="pick_up_location" name="pick_up_location" type="text" class="validate"/>
-			  <label for="pick_up_location">Pick-up Location</label>
-			</div>
-		  </div>
-		  <div class="row">
-			  <div class="input-field col s6">
-			  <input id="drop_off_location" name="drop_off_location" type="text" class="validate">
-			  <label for="drop_off_location">Drop-off Location</label>
-			</div>
-		</div>
->>>>>>> 60de4252f7775a8cd95c7bc8643e8262170bb754
-
 		  <div class="row">
 			<div class="input-field col s6">
 				<select class="validate required" name="start_time" id="start_time" required>
@@ -83,7 +60,6 @@
 				<label for="start_time">Start time</label>
 			</div>
 		  </div>
-<<<<<<< HEAD
 			
 		<div class="row">
 			<div class="input-field col s6">
@@ -92,11 +68,6 @@
 			</div>
 		</div>
 		 <div class="row">
-=======
-
-			
-		  <div class="row">
->>>>>>> 60de4252f7775a8cd95c7bc8643e8262170bb754
 			<div class="input-field col s6">
 				<select class=" validate required" name="end_time" id="end_time" required>
 					<option value="" selected></option>
