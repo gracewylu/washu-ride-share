@@ -28,18 +28,19 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		
 
-		<!--Navbar-->
-     <?php include("navbar.php");?>
+		
     </head>
     <body>
 	
-		<div>
-		  <ul class="side-nav fixed">
-			<li><a style="display:block" onclick="changePage('about')">About</a></li>
-			<li><a style="display:block" onclick="changePage('howto')">How to Use</a></li>
-		  </ul>
-		  <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
-		</div>
+		<header>
+			<!--Navbar-->
+			<?php include("navbar.php");?>
+			  <ul class="side-nav fixed" style='transform: translateX(0%);'>
+				<li><a style="display:block" onclick="changePage('about')">About</a></li>
+				<li><a style="display:block" onclick="changePage('howto')">How to Use</a></li>
+			  </ul>
+			  <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+		</header>
         
 		<div style="padding-left: 240px">
 			<div>
