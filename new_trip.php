@@ -32,13 +32,14 @@
 
     $number_going = 1; //when you create a trip naturally you will be going and those who join will be appended to this value later 
 
-    $trip_query = $mysqli->prepare("insert into trips (pick_up_location, drop_off_location, number_going, depart_time, arrive_time, return_time) values (?, ?, ?, ?, ?,?);");
+    $trip_query = $mysqli->prepare("insert into trips (pick_up_location, drop_off_location, number_going, depart_time, arrive_time, return_time, owner) values (?, ?, ?, ?, ?,?, ?);");
     if (!$trip_query){
         error_log("Failed to prepare new trip query");
         echo "Failed to prepare new trip query";
+        exit;
     }
     
-    $trip_query->bind_param("ssisss", $pick_up_location, $drop_off_location, $number_going, $depart_time, $arrive_time, $return_time);
+    $trip_query->bind_param("ssissss", $pick_up_location, $drop_off_location, $number_going, $depart_time, $arrive_time, $return_time, $driver);
     $trip_query->execute();
     $last_id = $trip_query->insert_id; 
 
@@ -48,9 +49,13 @@
         $car_query = $mysqli->prepare("insert into cars(model, total_seats, trip_id, color, driver) values (?, ?, ?, ?, ?);");
         if(!$car_query){
             echo "Failed to prepare a car query";
+            exit;
         }
         $car_query->bind_param("siiss", $model, $seats, $last_id, $color, $driver);
-        $car_query->execute(); 
+        if(!$car_query->execute()){
+            echo "Failed to execute car query";
+            exit;
+        } 
     }
     $last_car_id=$car_query->insert_id; 
     $car_query->close();
@@ -58,6 +63,7 @@
     $trip_to_user = $mysqli->prepare("insert into trips2users(trip_id, username, driving, car_id, is_owner) values (?, ?, ?, ?, ?);");
     if(!$trip_to_user){
         echo "Failed to prepare trip to user query";
+        exit;
     }    
     //$booleanvar?1:0; 
     $true = 1; 
@@ -65,9 +71,12 @@
     
     //echo "<br>".$last_id."<br>".$driver."<br>".$last_car_id;
     $trip_to_user->bind_param("isiii", $last_id, $driver, $true, $last_car_id, $true);
-    $trip_to_user->execute();
+    if(!$trip_to_user->execute()){
+        echo "Failed to execute trip to user query";
+        exit;
+    }
     $trip_to_user->close();
 
     //go back to calling page
-    //header("Location: home.php");
+    header("Location: home.php");
 ?>

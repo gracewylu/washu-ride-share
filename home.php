@@ -54,7 +54,7 @@
                 $depart_time = $depart_datetime->format("h:i");
                 $arrive_time = $arrive_datetime->format("h:i");
                 $leave_button = "<td><button type='submit' class='waves-effect waves-light btn leave-button' id='".$trip_id."'>Leave</button></td>";
-                $cancel_button = "<td><button type='submit' class='waves-effect waves-light btn red-darken2 cancel-button' id='".$trip_id."'>Cancel Trip</button></td>";
+                $cancel_button = "<td><button type='submit' class='waves-effect waves-light btn red darken-2 cancel-button' id='".$trip_id."'>Cancel Trip</button></td>";
                 $button = $leave_button;
                 if ($is_owner){
                     $button = $cancel_button;
@@ -77,7 +77,7 @@
             
             //notify server if leave button clicked
             $(".leave-button").click(function(event){
-                console.log("clicked leave");
+                //console.log("clicked leave");
                 $.ajax({
                     url:"leave_trip.php",
                     type:"POST",
@@ -103,6 +103,34 @@
 					}
                 });
             });
+			
+			//notify server from cancel button
+			$(".cancel-button").click(function(event){
+				$.ajax({
+                    url:"cancel_trip.php",
+                    type:"POST",
+                    dataType:"json",
+                    data:{trip_id:event.target.id},
+                    success:function(data){
+                        if (data.success) {
+                            console.log("success");
+						    $("#"+data.left_trip_id+".cancel-button")
+							.closest("tr")
+							.children('td')
+					        .animate({ padding: 0 })
+					        .wrapInner('<div />')
+					        .children()
+					        .slideUp(function() { $(this).closest('tr').remove()});
+						}
+                        else{
+                            console.log(data.message);
+                        }
+                    },
+                    error:function(jqxhr, textStatus, errorThrown){
+						console.log(textStatus, errorThrown);
+					}
+                });
+			});
         });
       </script>
     </body>
