@@ -152,10 +152,11 @@
 	  	<p><b>Suggested Events</b></p>
 	  	<table id="suggested_trips" style='width:90%'>
                 <tr>
-                    <th><b>Pick Up Location</b></th>
-                    <th><b>Depart Time</b></th>
-                    <th><b>Drop Off Location</b></th>
-                    <th><b>Arrive Time</b></th>
+                    <th><b>Date</b></th>
+                    <th><b>Time</b></th>
+                    <th><b>Pick up Location</b></th>
+                    <th><b>Drop off Location</b></th>
+                    <th></th>
                 </tr>
         </table>
 	  </div>
@@ -169,6 +170,7 @@
         
       <script> 
       	var loaded_pickup = false; 
+
       	var loaded_dropoff = false;
 
       	//continuous ajax request to run to show suggested events 
@@ -176,7 +178,7 @@
 			var $pick_up_location = document.getElementById('pick_up_location').value;
 			var $drop_off_location = document.getElementById('drop_off_location').value;
  			
- 			$.ajax({
+ 			 $.ajax({
 				type:'POST',
 				url: 'get_info.php',
 				dataType: 'json', 
@@ -187,8 +189,15 @@
 				success: function(trips){
 					//list the similar event in the suggested events column
 					$.each(trips, function(index, trip){
-						$('#suggested_trips').append('<tr><td>'+trip.pick_up_location+'</td><td>'+trip.depart_time+'</td><td>'+trip.drop_off_location+'</td><td>'+trip.arrive_time+'</td></tr>');
+						var depart_day=trip.depart_time.substr(5,2) + "/" + trip.depart_time.substr(8,2) + "/" + trip.depart_time.substr(0,4);
+						var hour=parseInt(trip.depart_time.substr(11,2));
+						if(hour > 12) hour=hour-12; 
+						var depart_time = hour + ":" + trip.depart_time.substr(14,2);
+						$('#suggested_trips').append('<tr><td>'+depart_day+'</td><td>'+depart_time+'</td><td>'+trip.pick_up_location+'</td><td>'+trip.drop_off_location+'</td><td><button type="submit" class="waves-effect waves-light btn join-button" id="'+trip.id+'">Join</button></td></tr>');
 					})
+				}, 
+				error:function(){
+					alert("Issue with getting results from database");
 				}
 			});
 
@@ -210,8 +219,7 @@
 
             	loaded_pickup = true; 
             });
-            $('#end_time').change(function(loaded_dropoff){
-
+            $('#end_time').change(function(){
             	if(loaded_dropoff) return;
 
             	find_suggested_events(); 
@@ -228,6 +236,38 @@
 		
 		//setup for materialize select
 		$('select').material_select();
+
+		$(document).on('click', '.join-button', function(event){
+			var tripId = event.target.id;
+			var ajaxData = {
+				url: "join_trip.php",
+				type: "POST",
+				dataType:"json",
+				data:{id:tripId},
+				success: function(data){
+					if (data.success) {
+						$("#"+data.joined_trip_id+".join-button")
+							.closest("tr")
+							.children('td')
+					        .animate({ padding: 0 })
+					        .wrapInner('<div />')
+					        .children()
+					        .slideUp(function() { $(this).closest('tr').remove()});
+					        setTimeout(function(){
+					        	window.location.replace("home.php");
+					        }, 1500);
+						}
+						else{
+							console.log(data.message);
+						}
+					},
+					error:function(jqxhr, textStatus, errorThrown){
+						console.log(textStatus, errorThrown);
+					}
+				}
+				$.ajax(ajaxData);
+		});
+
 
 		// var required = 0; 
 		// $('.required').keypress(function(event){
