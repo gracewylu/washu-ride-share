@@ -19,7 +19,6 @@
 			$trip = array(
 				"id" => $id, 
 				"depart_time" => $depart_time, 
-				"arrive_time" => $arrive_time, 
 				"drop_off_location" =>$drop_off_loc, 
 				"pick_up_location" => $pick_up_location
 			); 
@@ -41,12 +40,12 @@
 			$trip = array(
 				"id" => $id, 
 				"depart_time" => $depart_time, 
-				"arrive_time" => $arrive_time, 
 				"drop_off_location" =>$drop_off_location, 
 				"pick_up_location" => $pick_up_loc
 			); 
 			$trips[] = $trip;
 		}
+
 		echo json_encode($trips);
 		$suggested_trips->close();
 	}
