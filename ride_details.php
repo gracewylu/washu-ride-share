@@ -14,19 +14,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 
-<style>
-
-table.details {
-    border-collapse: collapse;
-	width:15%;
-	border: 1px solid black
-}
-
-th, td {
-    border: 1px solid black;
-}
-</style>
-
 <body>
 		
 
@@ -34,16 +21,21 @@ th, td {
 		
 		<?php
 		
-		$trip_id = $_POST['id'];
+		$id = $_POST['id'];
 		
-		$query = $mysqli->prepare("select drop_off_location, pick_up_location, depart_time from trips 
-		where id == trip_id ");
+		$query = $mysqli->prepare("select drop_off_location, driver, date, pick_up_location, depart_time, model, color, number_going from trips 
+		where trip_id = id 
+		join cars on (id = trip_id)");
 		if (!$query){
                     error_log("Could not prepare details query");
                     exit;
                 }
+		$query->execute();
+        $query->bind_result($drop_off_location, $driver, $date, $pick_up_location, $depart_time, $model, $color, $number_going);
 		
-		$details = "<table class='details'>
+		$car = $model + " " + $color;
+		
+		$details = "<table class='striped'>
 		<tr>
 			<td>Destination</td>
 			<td>%s</td>
@@ -72,57 +64,42 @@ th, td {
 		</tr>	
 		</table>";
 		
-		
+		printf($details, $drop_off_location, $driver, $date, $pick_up_location, $depart_time, $car, $number_going);
 		
 		?>
 		
-		
-		
-		<table class="details">
+		<table class='striped' style='width:40%'>
 		<tr>
 			<td>Destination</td>
-			<?php
-			$trip_id = $_POST['id'];
-			
-			$query = $mysqli->prepare("select drop_off_location from trips 
-			where id == trip_id ");
-			if (!$query){
-						error_log("Could not prepare details query");
-						exit;
-					}
-			$query->execute();
-            $query->bind_result($drop_off_location);
-			$new_entry = "<td>%s</td>";
-			printf($new_entry, $drop_off_location)
-			?>
+			<td>%s</td>
 		</tr>
 			<td>Driver</td>
-			<td></td>
+			<td>%s</td>
 		<tr>
 			<td>Date</td>
-			<td></td>
+			<td>%s</td>
 		</tr>
 		<tr>
 			<td>Pick-up Location</td>
-			<td></td>
+			<td>%s</td>
 		</tr>
 		<tr>
 			<td>Pick-up Time</td>
-			<td></td>
+			<td>%s</td>
 		</tr>
 		<tr>
 			<td>Car</td>
-			<td></td>
+			<td>%s</td>
 		</tr>
 		<tr>
 			<td>Number Going</td>
-			<td></td>
+			<td>%d</td>
 		</tr>	
-		</table>
+		</table>"
 		
 		<br>
 		
-		<button class="waves-effect waves-light btn" style="ali">Back</button>
+		<a class="waves-effect waves-light btn" href="trip_calendar.php">Button</a>
 
 		</div>
 

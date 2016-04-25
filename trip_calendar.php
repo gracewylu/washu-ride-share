@@ -1,4 +1,3 @@
-
 <?php
 //Filename: trip_calendar.php
 //Author: Sam Teeter, Joey Woodson
@@ -80,9 +79,9 @@
                     $time = $datetime->format("h:i");
 					
 					$new_entry = "            <tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><input type='hidden' name='id' value='%d'>";
+					$new_entry .= '<td><form action="ride_details.php" method="post"><button type="submit" class="waves-effect waves-light btn" id="'.$id.'">Details</button></form></td>';
 					$new_entry .= '<td><button type="submit" class="waves-effect waves-light btn join-button" id="'.$id.'">Join</button></td></tr>';
 					$new_entry .= "\n";
-
 					printf($new_entry, $day, $time, $pick_up_location, $drop_off_location, $number_going, $id);
                 }
             ?>
