@@ -20,12 +20,14 @@ nav ul li a{
             <li><a href='home.php'>My Rides</a></li>
             <li><a href='trip_calendar.php'>All Rides</a></li>
             <li><a href='about.php'>About</a></li>
+            <li><a href='user_profile.php'>My Profile</a></li>
 			<li><a href='logout.php'>Logout</a></li>
         </ul>
         <ul class='side-nav' id='sidebar'>
             <li><a href='home.php'>My Rides</a></li>
             <li><a href='trip_calendar.php'>All Rides</a></li>
             <li><a href='about.php'>About</a></li>
+            <li><a href='user_profile.php'>My Profile</a></li>
 			<li><a href='logout.php'>Logout</a></li>
         </ul>
     </div>
