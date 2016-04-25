@@ -13,17 +13,18 @@ nav ul li a{
 </style>
 <nav class="top-nav">
     <div class='nav-wrapper teal lighten-4 black-text'>
-        <a href='trip_calendar.php' class='page-title grey-text text-darken-3'>&nbsp;Get a Ride</a>
+        <!--<a href='trip_calendar.php' class='page-title grey-text text-darken-3'>&nbsp;Get a Ride</a>-->
+        <a href="trip_calendar.php" style="padding-left: 20px;"><img src="img/wurs_logo.png"></a>
         <a href='#' data-activates='sidebar' class='button-collapse'><i class='material-icons'>menu</i></a>
         <ul id='nav-mobile' class='right hide-on-med-and-down'>
             <li><a href='home.php'>My Rides</a></li>
-            <li><a href='trip_calendar.php'>Find a Ride</a></li>
+            <li><a href='trip_calendar.php'>All Rides</a></li>
             <li><a href='about.php'>About</a></li>
 			<li><a href='logout.php'>Logout</a></li>
         </ul>
         <ul class='side-nav' id='sidebar'>
             <li><a href='home.php'>My Rides</a></li>
-            <li><a href='trip_calendar.php'>Ride Calendar</a></li>
+            <li><a href='trip_calendar.php'>All Rides</a></li>
             <li><a href='about.php'>About</a></li>
 			<li><a href='logout.php'>Logout</a></li>
         </ul>

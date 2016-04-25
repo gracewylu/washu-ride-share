@@ -54,11 +54,12 @@
 			<ul id="about">
 				<li>
 				  <div class="collapsible-header">What is WashU Ride Share?</div>
-				  <div class="collapsible-body"><p>WashU Ride Share is a free ride-sharing service for Washington University in St. Louis students. Our goal is to connect students with each other through their common need to get somewhere.</p></div>
+				  <div class="collapsible-body"><p>WashU Ride Share is a project that originated from Washington University's CSE 437S Software Engineering class, where a team of 5 computer science students work together on a project for a semester. We decided to implement a free ride-sharing service for Washington University in St. Louis students. </p>
+				  	<p>Our goal is to connect students with similar interests and needs who are looking to go places and attend events together. We aim to encourage a stronger community amongst all Washington University students through this project.</p></div>
 				</li>
 				<li>
 				  <div class="collapsible-header">Why should I use WashU Ride Share?</div>
-				  <div class="collapsible-body"><p>By keeping rides between students, we believe we're creating a friendlier, safer environemnt versus other ride sharing services that look for drivers outside of the WashU community.</p></div>
+				  <div class="collapsible-body"><p>By keeping rides between students, we believe we're creating a friendlier, safer environment versus other ride sharing services that look for drivers outside of the WashU community.</p></div>
 				</li>
 				<li>
 				  <div class="collapsible-header">Is it free?</div>

@@ -30,6 +30,7 @@
     $depart_time = $date." ".$start_time.":00"; 
     $arrive_time = $date." ".$end_time.":00";
 
+    $return_day = $date." ".$return_time.":00";
     $number_going = 1; //when you create a trip naturally you will be going and those who join will be appended to this value later 
 
     $trip_query = $mysqli->prepare("insert into trips (pick_up_location, drop_off_location, number_going, depart_time, arrive_time, return_time, owner) values (?, ?, ?, ?, ?,?, ?);");
@@ -39,7 +40,7 @@
         exit;
     }
     
-    $trip_query->bind_param("ssissss", $pick_up_location, $drop_off_location, $number_going, $depart_time, $arrive_time, $return_time, $driver);
+    $trip_query->bind_param("ssissss", $pick_up_location, $drop_off_location, $number_going, $depart_time, $arrive_time, $return_day, $driver);
     $trip_query->execute();
     $last_id = $trip_query->insert_id; 
 
