@@ -54,15 +54,14 @@
             <h5 class="header center blue-text darken-4">
                  Enter your login information:
              </h5>
+                <h6 class="blue-grey-text">Registered? <a href='http://54.213.111.166/~cse437/login.html'>Login!</a></h6><br>
                 <p><label class='field'>Username: </label><input name='username' type='text' class='text-200'/></p>
                 <p><label class='field'>First name: </label><input name="first_name" type='text' class='text-200'/></p>
                 <p><label class='field'>Last name: </label><input name="last_name" type='text' class='text-200'/></p>
                 <p><label class='field'>Email: </label><input type='email' name='email_address' class='text-200'/></p>
                 <p><label class='field'>Password: </label><input name='password' type='password' class='text-200'/></p>
                 <p><label class='field'>Re-type password: </label><input name='password_retype' type='password' class='text-200'/></p>
-                <p><button class="btn waves-effect waves-light" type='submit' name='submit'>Register
-                <i class="material-icons right">send</i>
-             </button></p>
+                <p><button class="btn waves-effect waves-light" type='submit' name='submit'>Register<i class="material-icons right">send</i></button></p>
         </form>
     </div>
     </body>
