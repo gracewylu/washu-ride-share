@@ -31,16 +31,15 @@
                     exit;
         }
 		$query->execute();
+		
 		//means that there is most likely no car associated with the trip
 		if($query->num_rows == 0) {
 			$query->close();
 
-			if($trip_info = $mysqli->prepare("select drop_off_location, owner, depart_time, pick_up_location from trips where id = ".$id)){
+			if($trip_info = $mysqli->prepare("select drop_off_location, owner, depart_time, pick_up_location, return_time from trips where id = ".$id)){
 				if($trip_info->execute()){
 					$trip_info->store_result();
-					$trip_info->bind_result($d_location, $owner, $d_time, $p_location) or die("Error binding result - ".$trip_info->error);
-					// if($trip_info->bind_result($d_location, $owner, $d_time, $p_location)){
-					// 	echo "drop off location: ".$d_location;
+					$trip_info->bind_result($drop_off_location, $driver, $depart_time, $pick_up_location, $return_time) or die("Error binding result - ".$trip_info->error);
 						$details = "<table class='striped'>
 						<tr>
 						<td>Destination</td>
@@ -56,20 +55,16 @@
 						<td>Pick-up Location</td>
 						<td>%s</td>
 						</tr>
-		
+						<td>Return Time</td>
+						<td>%s</td>
+						</tr>
 						</table>";
-        				printf($details, $d_location, $owner, $d_time, $p_location);
-
-
-					// }
+						$trip_info->fetch();
+        				printf($details, $drop_off_location, $driver, $depart_time, $pick_up_location, $return_time);
 				}
 
 			}
-			// if (!$trip_info){
-			// 		echo "Couldn't acquire trip info";
-   //                  error_log("Could not prepare details query");
-   //                  exit;
-   //      	}
+
 		}
 		else{
         $query->bind_result($drop_off_location, $driver, $depart_time, $pick_up_location, $return_time, $model, $color, $number_going);

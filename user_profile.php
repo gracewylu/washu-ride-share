@@ -45,6 +45,8 @@
 	</p>
 </form>
         </div>
+        <div class="row">
+        <div class="col l8 offset-l2">
         <table style='width:90%'>
                 <tr>
                     <th><b>Name:</b></th>
@@ -70,7 +72,8 @@
             }
         ?>
         </div>
-        
+        </div>
+        </div>
         <!--Finish Materialize setup-->
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script type="text/javascript" src="js/materialize.min.js"></script>
