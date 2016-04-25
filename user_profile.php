@@ -23,27 +23,50 @@
         
         <div class="container">
         <h1 class="blue-grey-text">Profile for <?php echo $_SESSION['username'];?></h1><br>
+        <?php
+        $directory = sprintf("/home/cse437/user_pictures/%s/",$_SESSION['username']);
+		if(file_exists($directory)){
+        $files = scandir($directory);
+        $firstFile=$directory . $files[2];
+        ?>
+        <div class="container" id="picture">
+            <div style="height:200px;width:200px"id="picture_holder"><img style="max-height: 100%; max-width: 100%;"src="script.php?img=<?php echo $firstFile; ?>"></div>
+			<?php } else{
+				echo "No picture";
+			}
+			?>
+            <form enctype="multipart/form-data" action="uploader.php" id="pic_upload" method="POST">
+	<p>
+		<input type="hidden" name="MAX_FILE_SIZE" value="20000000" />
+		<label for="uploadfile_input">Choose a file to upload:</label> <input name="uploadedfile" type="file" id="uploadfile_input" />
+	</p>
+	<p>
+		<button class="btn waves-effect waves-light" type="submit" form = "pic_upload">Upload Picture<i class="material-icons right">send</i></button>
+	</p>
+</form>
+        </div>
         <table style='width:90%'>
                 <tr>
                     <th><b>Name:</b></th>
                     <th><b>Email:</b></th>
+                    <th><b>Address:</b></th>
                 </tr>
         <?php
         //this will be changed to post of whatever user the profile is being requested for
         $username = $_SESSION['username'];      
-            $user_request = $mysqli->prepare("select firstname, lastname, email from users where username = ?");
+            $user_request = $mysqli->prepare("select firstname, lastname, email, address from users where username = ?");
             if (!$user_request){
                 error_log($mysqli->error);
                 exit;
             }
             $user_request->bind_param("s", $username);
             $user_request->execute();
-            $user_request->bind_result($firstname, $lastname, $email);
+            $user_request->bind_result($firstname, $lastname, $email, $address);
             
             //print out trip data in table
             while($user_request->fetch()){
-                printf("<tr><td>%s %s</td><td>%s</td></tr>",
-                       $firstname, $lastname, $email);
+                printf("<tr><td>%s %s</td><td>%s</td><td>%s</td></tr>",
+                       $firstname, $lastname, $email, $address);
             }
         ?>
         </div>
