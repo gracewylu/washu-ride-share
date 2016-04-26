@@ -23,17 +23,6 @@
 	$query->execute();
 	//$query->fetch();
 	$query->store_result();
-	if($query->num_rows > 0){
-		$query->bind_result($id,$pul,$dol,$ng,$dt,$at,$rt);
-		while($query->fetch()) {
-			echo '<div class="row"><div class="col s12 l2"></div>'
-	    	// echo $pul."\t".$dol."\t".$ng."\t".$dt."\t".$at."\t".$rt."\n";
-		}
-		$query->close();
-	} else{
-		echo "<h3 class=\"center\">Sorry there weren't any matching results</h3>";
-		$query->close();
-	}
 ?>
 <head>
 		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -47,9 +36,10 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
+	<div class="row"></div>
 	<div class="row">
 		<div class="col s12 l2">
-			<p><a href="ride_details.php?details=">Pick Up Location</b></p>
+			<p><b>Pick Up Location</b></p>
 		</div>
 		<div class="col s12 l2">
 			<p><b>Drop off Location</b></p>
@@ -63,10 +53,33 @@
 		<div class="col s12 l2">
 			<p><b>Arrive Time</b></p>
 		</div>
-			<div class="col s12 l2">
+		<div class="col s12 l2">
 			<p><b>Return Time</b></p>
 		</div>
 	</div>
+	<?php
+		if($query->num_rows > 0){
+		$query->bind_result($id,$pul,$dol,$ng,$dt,$at,$rt);
+		while($query->fetch()) {
+			echo '<div class="row"><div class="col s12 l2"><a href=ride_details.php?details='.$id.'>'.$pul.'</a></div><div class="col s12 l2"><p>'.$dol.'</p></div><div class="col s12 l2"><p>'.$ng.'</p></div>
+				<div class="col s12 l2">
+					<p>'.$dt.'</p>
+				</div>
+				<div class="col s12 l2">
+					<p>'.$at.'</p>
+				</div>
+				<div class="col s12 l2">
+					<p>'.$rt.'</p>
+				</div>
+			</div>';
+	    	// echo $pul."\t".$dol."\t".$ng."\t".$dt."\t".$at."\t".$rt."\n";
+		}
+		$query->close();
+		} else{
+			echo "<h3 class=\"center\">Sorry there weren't any matching results</h3>";
+			$query->close();
+		}
+	?>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script type="text/javascript" src="js/materialize.min.js"></script>
 </body>
