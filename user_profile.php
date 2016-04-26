@@ -23,18 +23,20 @@
         
 <!--         <div class="container">
  -->    <h1 class="blue-grey-text center">Profile for <?php echo $_SESSION['username'];?></h1><br>
-        <?php
-        $directory = sprintf("/home/cse437/user_pictures/%s/",$_SESSION['username']);
-		if(file_exists($directory)){
-        $files = scandir($directory);
-        $firstFile=$directory . $files[2];
-        ?>
+        
         <div class="container" id="picture">
             <div class="row">
                 <div class="col s12 l2">
-                    <div style="height:200px;width:200px"id="picture_holder"><img style="max-height: 100%; max-width: 100%;"src="script.php?img=<?php echo $firstFile; ?>"></div>
-			             <?php } else{
-				            echo "No picture";
+					<?php
+					 $directory = sprintf("/home/cse437/user_pictures/%s/",$_SESSION['username']);
+					if(file_exists($directory)){
+					$files = scandir($directory);
+					$firstFile=$directory . $files[2];
+					?>
+                    <div style="height:200px;width:200px" id="picture_holder"><img style="max-height: 100%; max-width: 100%;"src="script.php?img=<?php echo $firstFile; ?>"></div>
+			             <?php } else{?>
+							<div style="height:200px;width:200px" id="picture_holder"></div>
+						<?php
 			             }
 			             ?>
                 </div>
