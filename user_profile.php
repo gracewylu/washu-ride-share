@@ -31,36 +31,40 @@
         ?>
         <div class="container" id="picture">
             <div class="row">
-                <div class="col s12 l3">
+                <div class="col s12 l2">
                     <div style="height:200px;width:200px"id="picture_holder"><img style="max-height: 100%; max-width: 100%;"src="script.php?img=<?php echo $firstFile; ?>"></div>
 			             <?php } else{
 				            echo "No picture";
 			             }
 			             ?>
                 </div>
-                <div class="col l7 offset-l2">
+                <div class="col l9 offset-l1">
                     <table style='width:90%'>
                         <tr>
                         <th><b>Name:</b></th>
                         <th><b>Email:</b></th>
                         <th><b>Address:</b></th>
+                        <th><b>Description: </b></th>
                         </tr>
                     <?php
                         //this will be changed to post of whatever user the profile is being requested for
                         $username = $_SESSION['username'];      
-                        $user_request = $mysqli->prepare("select firstname, lastname, email, address from users where username = ?");
+                        $user_request = $mysqli->prepare("select firstname, lastname, email, address, user_desc from users where username = ?");
                         if (!$user_request){
                             error_log($mysqli->error);
                             exit;
                         }
                         $user_request->bind_param("s", $username);
                         $user_request->execute();
-                        $user_request->bind_result($firstname, $lastname, $email, $address);
+                        $user_request->bind_result($firstname, $lastname, $email, $address, $user_desc);
                         
                         //print out trip data in table
                         while($user_request->fetch()){
-                            printf("<tr><td>%s %s</td><td>%s</td><td>%s</td></tr>",
-                                   $firstname, $lastname, $email, $address);
+                            if($address ==null){
+                                $address = 'N/A';
+                            }
+                            printf("<tr><td>%s %s</td><td>%s</td><td>%s</td><td>%s</td></tr>",
+                                   $firstname, $lastname, $email, $address, $user_desc);
                         }
                     ?>
                     </table>
@@ -73,12 +77,14 @@
                 </div>
             </div>
             <div class="row">
-                <form action="uploader.php">
+                <form action="uploader.php" enctype="multipart/form-data" method="post">
                     <div class="col s12 l4">
                         <div class="file-field input-field">
                         <div class="btn">
                         <span>File</span>
-                            <input type="file">
+                            <input type="hidden" name="MAX_FILE_SIZE" value="20000000" />
+
+                            <input type="file" name="uploadfile" id="file">
                         </div>
                         <div class="file-path-wrapper">
                             <input class="file-path validate" type="text">
@@ -86,7 +92,7 @@
                         </div>
                     </div>
                     <div class="col s12 l5" style="padding-top: 23px;">
-                        <button class="btn waves-effect waves-light" type="submit" form = "pic_upload">Upload Picture<i class="material-icons right">send</i></button>
+                        <button class="btn waves-effect waves-light" type="submit">Upload Picture<i class="material-icons right">send</i></button>
                     </div>
                 </form>
             </div>
