@@ -4,5 +4,5 @@
 //Content: logout script
 	session_start();
 	session_destroy();
-	header("Location:http://".$_SERVER['SERVER_NAME']."/~cse437/login.html");
+	header("Location:http://".$_SERVER['SERVER_NAME']."/~cse437/about.php");
 ?>

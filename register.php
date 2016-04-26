@@ -36,15 +36,32 @@
 <!doctype html>
 <html>
     <head>
+        <style>
+            nav ul li a{
+                color:#424242
+        }
+        </style>
         <title>Register</title>
         <link rel="stylesheet" type="text/css" href="css/materialize.min.css"/>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <script src="js/materialize.min.js"></script>
     </head>
     <body>
-        <div class="section teal lighten-4">
+        <nav class="top-nav">
+            <div class='nav-wrapper teal lighten-4 black-text'>
+                <a href="trip_calendar.php" style="padding-left: 20px;"><img src="img/wurs_logo.png"></a>
+                <a href='#' data-activates='sidebar' class='button-collapse'><i class='material-icons'>menu</i></a>
+                <ul id='nav-mobile' class='right hide-on-med-and-down'>
+                    <li><a href='about.php'>About</a></li>
+                </ul>
+                <ul class='side-nav' id='sidebar'>
+                    <li><a href='about.php'>About</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="section teal lighten-1">
              <div class="container">
-                 <h2 class="header center grey-text text-darken-3">
+                 <h2 class="header center grey-text text-lighten-4">
                      Register
                  </h2>
              </div>
