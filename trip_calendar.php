@@ -84,6 +84,7 @@
 					$new_entry .= "\n";
 					printf($new_entry, $day, $time, $pick_up_location, $drop_off_location, $number_going, $id);
                 }
+                $query->close();
             ?>
 			
 			

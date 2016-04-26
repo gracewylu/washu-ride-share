@@ -112,7 +112,7 @@
 					}
 					?>
 				</select>
-				<label for="return_time">Return time (optional)</label>
+				<label for="return_time">Return time</label>
 			</div>
 		  </div>
 	

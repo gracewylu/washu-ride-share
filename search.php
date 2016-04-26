@@ -21,14 +21,18 @@
 	$search = "%".$search."%";
 	$query->bind_param("s", $search);
 	$query->execute();
-	// if($query->num_rows==0){
-	// 	echo "<h3 class=\"center\">Sorry there aren't any matching results</h3>";
-	// }
+	//$query->fetch();
+	$query->store_result();
+	if($query->num_rows > 0){
 		$query->bind_result($pul,$dol,$ng,$dt,$at,$rt);
 		while($query->fetch()) {
 	    	echo $pul."\t".$dol."\t".$ng."\t".$dt."\t".$at."\t".$rt."\n";
 		}
 		$query->close();
+	} else{
+		echo "<h3 class=\"center\">Sorry there weren't any matching results</h3>";
+		$query->close();
+	}
 ?>
 <head>
 		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
