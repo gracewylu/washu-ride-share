@@ -19,7 +19,12 @@ if( !preg_match('/^[\w_\-]+$/', $username) ){
 if(!file_exists(sprintf("/home/cse437/user_pictures/%s",$username))){
 	mkdir(sprintf("/home/cse437/user_pictures/%s",$username),0777,true);
 }
-
+$path = sprintf("/home/cse437/user_pictures/%s",$username);
+$files = scandir($path);
+$firstFile = $files[2];
+if($firstFile){
+	unlink($path . $firstFile);
+}
 $full_path = sprintf("/home/cse437/user_pictures/%s/%s", $username, $filename);
 
 if($_FILES['uploadfile']['error']==0){ 
