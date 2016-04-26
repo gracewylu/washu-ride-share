@@ -88,7 +88,7 @@
 					}
 					?>
 				</select>
-				<label for="end_time">End time</label>
+				<label for="end_time">Arrival time</label>
 			</div>
 		  </div>
 		<div class="row">
@@ -112,7 +112,7 @@
 					}
 					?>
 				</select>
-				<label for="return_time">Return time (optional)</label>
+				<label for="return_time">Return time</label>
 			</div>
 		  </div>
 	
@@ -120,7 +120,7 @@
         	<div class="col s12 m6 l9">
           		<div class="card blue-grey darken-1">
             		<div class="card-content white-text">
-              			<span class="card-title">Car I'm driving (optional)</span>
+              			<span class="card-title">Car I'm driving (Required for drivers)</span>
 						<div class="row">
 			  				<div class="input-field col s6 l9">
 			  					<input id="seats" name="seats" type="text">
@@ -231,7 +231,8 @@
 		//Set up for datepickers
 		$('.datepicker').pickadate({
 			selectMonths: true, // Creates a dropdown to control month
-			format: 'mm/dd/yyyy'
+			format: 'mm/dd/yyyy', 
+			min: new Date()
 		});
 		
 		//setup for materialize select

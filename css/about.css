@@ -1,0 +1,15 @@
+.navbar{
+	margin-bottom:0;
+}
+div.parallax-container {
+	/*height: 400px;*/
+	overflow: inherit;
+}
+
+.parallax {
+	img {
+		-webkit-filter: brightness(50%);
+		-moz-filter: brightness(50%);
+		filter: brightness(50%);
+	}
+}
