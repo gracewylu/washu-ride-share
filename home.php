@@ -54,14 +54,15 @@
                 $depart_day = $depart_datetime->format("m/d/y");
                 $depart_time = $depart_datetime->format("h:i");
                 $arrive_time = $arrive_datetime->format("h:i");
+				$details_button = '<td><form action="ride_details.php" method="get" name="form'.$trip_id.'"><button type="submit" class="waves-effect waves-light btn" name="details" value="'.$trip_id.'">Details</button></form></td>';
                 $leave_button = "<td><button type='submit' class='waves-effect waves-light btn leave-button' id='".$trip_id."'>Leave</button></td>";
                 $cancel_button = "<td><button type='submit' class='waves-effect waves-light btn red darken-2 cancel-button' id='".$trip_id."'>Cancel Trip</button></td>";
                 $button = $leave_button;
                 if ($is_owner){
                     $button = $cancel_button;
                 }
-                printf("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td>%s</tr>",
-                       $depart_day, $depart_time, $arrive_time, $pick_up_location, $drop_off_location, $number_going, $button);
+                printf("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td>%s%s</tr>",
+                       $depart_day, $depart_time, $arrive_time, $pick_up_location, $drop_off_location, $number_going,$details_button,$button);
             }
         ?>
             </table><br>
