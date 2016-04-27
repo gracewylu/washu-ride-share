@@ -29,6 +29,7 @@
       ?>
     </head>
     <body>
+<<<<<<< HEAD
        <h1 class="blue-grey-text center">Profile for <?php echo $username;?></h1><br>
         <div class="container" id="picture">
             <div class="row">
@@ -57,6 +58,7 @@
                     <?php
                         //this will be changed to post of whatever user the profile is being requested for
                         $user_request = $mysqli->prepare("select firstname, lastname, email, address, user_desc, rating, num_ratings from users where username = ?");
+
                         if (!$user_request){
                             error_log($mysqli->error);
                             exit;

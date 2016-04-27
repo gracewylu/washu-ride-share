@@ -54,7 +54,7 @@
 				
 				//this query selects info for trips that the user is NOT currently on
 				//and manually counts the number of people going for each trip
-                $query = $mysqli->prepare("select depart_time, arrive_time, return_time, pick_up_location, drop_off_location, count(*), id 
+                $query = $mysqli->prepare("select depart_time, arrive_time, return_time, pick_up_location, drop_off_location, count(*), id, (select count(*) from cars where trip_id=trips.id) as num_drivers 
 											from trips 
 											join trips2users as tu1
 											on tu1.trip_id = trips.id and not exists(
@@ -70,7 +70,7 @@
                 }
 				$query->bind_param("s", $_SESSION['username']);
                 $query->execute();
-                $query->bind_result($depart_date, $arrive_date, $return_date, $pick_up_location, $drop_off_location, $number_going, $id);
+                $query->bind_result($depart_date, $arrive_date, $return_date, $pick_up_location, $drop_off_location, $number_going, $id, $num_drivers);
                 
                 //grabs the info of trip from query 
                 while($query->fetch()){
@@ -80,11 +80,15 @@
 					
 					$new_entry = "<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><input type='hidden' name='id' value='%d'>";
 					$new_entry .= '<td><form action="ride_details.php" method="get" name="form'.$id.'"><button type="submit" class="waves-effect waves-light btn" name="details" value="'.$id.'">Details</button></form></td>';
-					$new_entry .= '<td><button type="submit" class="waves-effect waves-light btn join-button" id="'.$id.'">Join</button></td></tr>';
-					$new_entry .= "\n";
+					$new_entry .= '<td><button type="submit" class="waves-effect waves-light btn join-button" id="'.$id.'">Join</button></td>';
+					if ($num_drivers == 0) {
+						$new_entry .= '<td>Needs a driver.</td>';
+					}
+					$new_entry .= "</tr>\n";
 					printf($new_entry, $day, $time, $pick_up_location, $drop_off_location, $number_going, $id);
                 }
                 $query->close();
+				
             ?>
 			
 			
