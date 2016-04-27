@@ -21,7 +21,7 @@
     </head>
     <body>
 		<?php
-		if(isset($_GET['user'])){
+		if(array_key_exists('user',$_GET)){
 			$username=$_GET['user'];
 		} else{
 			$username = $_SESSION['username'];
