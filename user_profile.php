@@ -20,15 +20,21 @@
       <?php include("navbar.php");?>
     </head>
     <body>
-        
+		<?php
+		if(isset($_GET['user'])){
+			$username=$_GET['user'];
+		} else{
+			$username = $_SESSION['username'];
+		}
+        ?>
 <!--         <div class="container">
- -->    <h1 class="blue-grey-text center">Profile for <?php echo $_SESSION['username'];?></h1><br>
+ -->    <h1 class="blue-grey-text center">Profile for <?php $username;?></h1><br>
         
         <div class="container" id="picture">
             <div class="row">
                 <div class="col s12 l2">
 					<?php
-					 $directory = sprintf("/home/cse437/user_pictures/%s/",$_SESSION['username']);
+					 $directory = sprintf("/home/cse437/user_pictures/%s/",$username);
 					if(file_exists($directory)){
 					$files = scandir($directory);
 					$firstFile=$directory . $files[2];
@@ -50,7 +56,6 @@
                         </tr>
                     <?php
                         //this will be changed to post of whatever user the profile is being requested for
-                        $username = $_SESSION['username'];      
                         $user_request = $mysqli->prepare("select firstname, lastname, email, address, user_desc from users where username = ?");
                         if (!$user_request){
                             error_log($mysqli->error);
