@@ -78,7 +78,7 @@
                     $day = $datetime->format("m/d/y");
                     $time = $datetime->format("h:i");
 					
-					$new_entry = "            <tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><input type='hidden' name='id' value='%d'>";
+					$new_entry = "<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><input type='hidden' name='id' value='%d'>";
 					$new_entry .= '<td><form action="ride_details.php" method="get" name="form'.$id.'"><button type="submit" class="waves-effect waves-light btn" name="details" value="'.$id.'">Details</button></form></td>';
 					$new_entry .= '<td><button type="submit" class="waves-effect waves-light btn join-button" id="'.$id.'">Join</button></td></tr>';
 					$new_entry .= "\n";

@@ -45,8 +45,8 @@
 						<td>Destination</td>
 						<td>%s</td>
 						</tr>
-						<td>Driver</td>
-						<td>%s</td>
+						<td>Creator of Trip</td>
+						<td><a href='user_profile.php?user=%s'>%s</td>
 						<tr>
 						<td>Depart Time</td>
 						<td>%s</td>
@@ -60,7 +60,7 @@
 						</tr>
 						</table>";
 						$trip_info->fetch();
-        				printf($details, $drop_off_location, $driver, $depart_time, $pick_up_location, $return_time);
+        				printf($details, $drop_off_location,$driver, $driver, $depart_time, $pick_up_location, $return_time);
 				}
 
 			}

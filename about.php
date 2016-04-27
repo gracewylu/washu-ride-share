@@ -55,7 +55,7 @@
                   <h5 class="center teal-text text-darken-4">Why should I use WURS?</h5>
                 </div>
                 <div class='collapsible-body'>
-					<p class="center teal-text text-darken-4">By keeping rides between students, we believe we're creating a friendlier, safer environment versus other ride sharing services that look for drivers outside of the WashU community.</p>
+					<p class="center teal-text text-darken-4">By keeping rides between students, we believe we're creating a friendlier, safer environment versus other ride sharing services that look for drivers outside of the WashU community. We think that this is a great way for those who are willing to drive others to interact with others who are in the same clubs, have similar interests, or just want to hang out with new people.</p>
 				</div>                
               </li>
               <li>

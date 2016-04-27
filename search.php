@@ -11,7 +11,7 @@
 
 	$search = $_GET['q'];
 	//this isn't correct need to fix this so that it can search through the entire database not just for similar pick_up_location 
-	$query = $mysqli->prepare("SELECT id, pick_up_location, drop_off_location, number_going, depart_time, arrive_time, return_time FROM trips WHERE pick_up_location LIKE ?");
+	$query = $mysqli->prepare("SELECT id, pick_up_location, drop_off_location, number_going, depart_time, arrive_time, return_time FROM trips WHERE pick_up_location LIKE ? OR drop_off_location LIKE ?");
 	
 	if(!$query) {
 	    echo $mysqli->error;
@@ -19,7 +19,7 @@
 	}
 	
 	$search = "%".$search."%";
-	$query->bind_param("s", $search);
+	$query->bind_param("ss", $search, $search);
 	$query->execute();
 	//$query->fetch();
 	$query->store_result();
@@ -36,6 +36,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
+	<?php
+		if($query->num_rows > 0){
+	?>
 	<div class="row"></div>
 	<div class="row">
 		<div class="col s12 l2">
@@ -58,7 +61,6 @@
 		</div>
 	</div>
 	<?php
-		if($query->num_rows > 0){
 		$query->bind_result($id,$pul,$dol,$ng,$dt,$at,$rt);
 		while($query->fetch()) {
 			echo '<div class="row"><div class="col s12 l2"><a href=ride_details.php?details='.$id.'>'.$pul.'</a></div><div class="col s12 l2"><p>'.$dol.'</p></div><div class="col s12 l2"><p>'.$ng.'</p></div>
